@@ -1,0 +1,13 @@
+name: PerkRoll
+version: '${project.version}'
+main: me.frxq.perkroll.PerkRoll
+api-version: 1.18
+author: frxq
+description: PerkRoll is an advanced perk rolling system that allows players to customize and enhance their gameplay experience with unique perks and abilities.
+softdepend:
+  - EdDungeons
+
+commands:
+  test:
+    usage: '/test'
+    description: 'Test command'

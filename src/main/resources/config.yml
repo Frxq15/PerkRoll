@@ -1,0 +1,25 @@
+#applicable types - "MySQL", "h2"
+storage-method: "h2"
+database:
+  mysql:
+    host: "host"
+    port: 3306
+    database: "database"
+    username: "username"
+    password: "password"
+
+tillGuaranteed:
+  amount: 100
+  rarity: 'Master'
+
+perks:
+  attack:
+    rarity: 'Basic'
+    levels:
+      1:
+        chance: '40'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'Shard'
+            amount: '5' # This is the percentage boost

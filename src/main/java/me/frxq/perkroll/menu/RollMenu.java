@@ -1,0 +1,50 @@
+package me.frxq.perkroll.menu;
+
+import me.frxq.perkroll.PerkRoll;
+import me.frxq.perkroll.datafactory.player.GPlayer;
+import me.frxq.perkroll.integration.IntegrationType;
+import me.frxq.perkroll.integration.integrations.EdDungeonsIntegration;
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+
+import java.util.HashMap;
+
+public class RollMenu extends GUITemplate {
+    private PerkRoll plugin;
+    private GPlayer gPlayer;
+    private FileConfiguration file;
+
+    private EdDungeonsIntegration integration;
+
+    public RollMenu(PerkRoll plugin, GPlayer gPlayer) {
+        super(plugin, plugin.getFileManager().getRollMenuFile().getInt("ROWS"),
+                plugin.getFileManager().getRollMenuFile().getString("TITLE"));
+        this.plugin = plugin;
+        this.integration = (EdDungeonsIntegration) plugin.getIntegrationManager().getIntegration(IntegrationType.EDDUNGEONS);
+        this.gPlayer = gPlayer;
+        this.file = plugin.getFileManager().getRollMenuFile();
+        register();
+    }
+    public void register() {
+        file.getConfigurationSection("ITEMS").getKeys(false).forEach(item -> {
+            int slot = getItemSlot(file, "ITEMS."+item);
+            HashMap<String, String> placeholders = new HashMap<>();
+            placeholders.put("%tickets%", String.valueOf(gPlayer.getTickets()));
+            if(item.equalsIgnoreCase("ROLL_PERK")) {
+                setItem(slot, createItem(file, "ITEMS." + item, placeholders, gPlayer.getName(), true), p -> {
+                    p.getOpenInventory().close();
+                    Bukkit.broadcastMessage("Rolling Perk...");
+                });
+            } else {
+                setItem(slot, createItem(file, "ITEMS." + item, placeholders, gPlayer.getName(), true));
+            }
+        });
+        setSword();
+    }
+    public void setSword() {
+        if(!file.getBoolean("sword.enabled")) return;
+
+        int slot = file.getInt("sword.slot");
+        setItem(slot, integration.getSwordAPI().getSwordItemFromPlayer(gPlayer.getPlayer()));
+    }
+}

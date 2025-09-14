@@ -1,0 +1,22 @@
+ROWS: 5
+TITLE: "&8Tool Perks"
+
+sword:
+  enabled: true
+  slot: 22
+
+ITEMS:
+  ROLL_PERK: # keep as ROLL_PERK
+    SLOT: 25
+    MATERIAL: LIME_DYE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&a&lRoll a Perk Ticket'
+    LORE:
+      - '&7Clicking this will randomly apply a'
+      - '&7Tool Perk to your own Pickaxe!'
+      - ''
+      - '&2&l → &aPerk Tickets: &f%tickets%'
+      - ''
+      - '&a&lCLICK HERE'
+      - '&2Click here to roll a Tool Perk Ticket'
