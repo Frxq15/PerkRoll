@@ -5,6 +5,7 @@ import me.frxq.perkroll.datafactory.DataFactory;
 import me.frxq.perkroll.file.FileManager;
 import me.frxq.perkroll.integration.IntegrationManager;
 import me.frxq.perkroll.menu.GUIListeners;
+import me.frxq.perkroll.perk.PerkCache;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,6 +16,7 @@ public final class PerkRoll extends JavaPlugin {
     private IntegrationManager integrationManager;
     private FileManager fileManager;
     private DataFactory dataFactory;
+    private PerkCache perkCache;
 
     @Override
     public void onEnable() {
@@ -56,6 +58,8 @@ public final class PerkRoll extends JavaPlugin {
             return;
         }
 
+        perkCache = new PerkCache(this);
+
         getCommand("test").setExecutor(new testCommand());
         Bukkit.getPluginManager().registerEvents(new GUIListeners(), this);
 
@@ -63,4 +67,5 @@ public final class PerkRoll extends JavaPlugin {
     public IntegrationManager getIntegrationManager() { return integrationManager; }
     public FileManager getFileManager() { return fileManager; }
     public DataFactory getDataFactory() { return dataFactory; }
+    public PerkCache getPerkCache() { return perkCache; }
 }
