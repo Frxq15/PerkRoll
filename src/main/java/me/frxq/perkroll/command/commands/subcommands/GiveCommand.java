@@ -47,6 +47,7 @@ public class GiveCommand extends SubCommand {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        if(args.length == 1) { return getVisiblePlayers(sender); }
         return List.of();
     }
 }
