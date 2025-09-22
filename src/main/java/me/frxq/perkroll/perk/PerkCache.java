@@ -65,4 +65,21 @@ public class PerkCache {
     public Perk getPerk(String name) {
         return cache.get(name);
     }
+    public String debugAllPerks() {
+        StringBuilder sb = new StringBuilder();
+        for (String perkName : cache.keySet()) {
+            Perk perk = cache.get(perkName);
+            sb.append("Perk: ").append(perk.getName()).append(", Rarity: ").append(perk.getRarity()).append("\n");
+            for (int level : perk.getPerks().keySet()) {
+                sb.append("  Level ").append(level).append(":\n");
+                for (PerkBoost boost : perk.getLevel(level)) {
+                    sb.append("    - Type: ").append(boost.getBoostType())
+                      .append(", Target: ").append(boost.getBoostTarget())
+                      .append(", Amount: ").append(boost.getAmount())
+                      .append(", Chance: ").append(boost.getChance()).append("\n");
+                }
+            }
+        }
+        return sb.toString();
+    }
 }

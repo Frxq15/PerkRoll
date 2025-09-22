@@ -11,3 +11,7 @@ commands:
   test:
     usage: '/test'
     description: 'Test command'
+  perkroll:
+    usage: '/perkroll <subcommand>'
+    description: 'Main command for perkroll'
+    aliases: [pr]

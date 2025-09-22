@@ -1,6 +1,7 @@
 package me.frxq.perkroll.datafactory.player;
 
 import me.frxq.perkroll.PerkRoll;
+import me.frxq.perkroll.perk.ActivePerk;
 import me.frxq.perkroll.perk.Perk;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -16,7 +17,7 @@ public class GPlayer {
     private String name;
 
     private int tickets, tillGuaranteed, ticketsUsed;
-    private Perk perk;
+    private ActivePerk activePerk;
 
     public GPlayer(PerkRoll plugin, UUID uuid, String name, int tickets, int tillGuaranteed, int ticketsUsed, String activePerk, int activeLevel) {
         this.plugin = plugin;
@@ -25,7 +26,8 @@ public class GPlayer {
         this.tickets = tickets;
         this.tillGuaranteed = tillGuaranteed;
         this.ticketsUsed = ticketsUsed;
-        this.perk = null; //TB REPLACED
+
+        this.activePerk = null; //TB REPLACED
     }
 
     public GPlayer(PerkRoll plugin, UUID uuid, String name) {
@@ -35,7 +37,7 @@ public class GPlayer {
         this.tickets = 0;
         this.tillGuaranteed = 100;
         this.ticketsUsed = 0;
-        this.perk = null;
+        this.activePerk = null;
     }
 
     public UUID getUUID() {
@@ -49,6 +51,16 @@ public class GPlayer {
     }
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean hasActivePerk() {
+        return activePerk != null;
+    }
+    public ActivePerk getActivePerk() {
+        return activePerk;
+    }
+    public void setActivePerk(ActivePerk activePerk) {
+        this.activePerk = activePerk;
     }
 
     public int getTickets() {
@@ -67,5 +79,4 @@ public class GPlayer {
     public void setTickets(int tickets) {
         this.tickets = tickets;
     }
-    public Perk getActivePerk() { return perk;}
 }

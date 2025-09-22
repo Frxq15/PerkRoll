@@ -1,12 +1,12 @@
 #applicable types - "MySQL", "h2"
-storage-method: "h2"
+storage-method: "MySQL"
 database:
   mysql:
-    host: "host"
+    host: "na01-sql.pebblehost.com"
     port: 3306
-    database: "database"
-    username: "username"
-    password: "password"
+    database: "customer_969304_perkroll"
+    username: "customer_969304_perkroll"
+    password: "Gb6zoJ7cz6cG^4v@MChWiBkc"
 
 tillGuaranteed:
   amount: 100

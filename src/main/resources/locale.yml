@@ -1,0 +1,5 @@
+NO_PERMISSION: '&cYou do not have permission to use this command.'
+UNKNOWN_SUBCOMMAND: '&cThe sub command you provided does not exist.'
+PLAYER_NOT_FOUND: '&cThe player you specified could not be found.'
+INVALID_INPUT: '&cThe input you provided is invalid.'
+TICKETS_ADDED: '&7You added &b%amount% &7tickets to &b%player%&7.'

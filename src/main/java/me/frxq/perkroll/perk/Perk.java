@@ -1,5 +1,6 @@
 package me.frxq.perkroll.perk;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,4 +18,9 @@ public class Perk {
     public String getName() { return name; }
     public String getRarity() { return rarity; }
     public HashMap<Integer, List<PerkBoost>> getPerks() { return perks; }
+
+    public List<PerkBoost> getLevel(int level) {
+        return perks.getOrDefault(level, new ArrayList<>());
+    }
+
 }

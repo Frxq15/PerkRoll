@@ -1,9 +1,10 @@
 package me.frxq.perkroll;
 
-import me.frxq.perkroll.command.testCommand;
+import me.frxq.perkroll.command.CommandHandler;
 import me.frxq.perkroll.datafactory.DataFactory;
 import me.frxq.perkroll.file.FileManager;
 import me.frxq.perkroll.integration.IntegrationManager;
+import me.frxq.perkroll.manager.LocaleManager;
 import me.frxq.perkroll.menu.GUIListeners;
 import me.frxq.perkroll.perk.PerkCache;
 import org.bukkit.Bukkit;
@@ -17,6 +18,8 @@ public final class PerkRoll extends JavaPlugin {
     private FileManager fileManager;
     private DataFactory dataFactory;
     private PerkCache perkCache;
+    private CommandHandler commandHandler;
+    private LocaleManager localeManager;
 
     @Override
     public void onEnable() {
@@ -60,7 +63,12 @@ public final class PerkRoll extends JavaPlugin {
 
         perkCache = new PerkCache(this);
 
-        getCommand("test").setExecutor(new testCommand());
+        localeManager = new LocaleManager(this);
+        localeManager.createLocaleFile();
+
+        commandHandler = new CommandHandler(this);
+        commandHandler.load();
+
         Bukkit.getPluginManager().registerEvents(new GUIListeners(), this);
 
     }
@@ -68,4 +76,6 @@ public final class PerkRoll extends JavaPlugin {
     public FileManager getFileManager() { return fileManager; }
     public DataFactory getDataFactory() { return dataFactory; }
     public PerkCache getPerkCache() { return perkCache; }
+    public CommandHandler getCommandHandler() { return commandHandler; }
+    public LocaleManager getLocaleManager() { return localeManager; }
 }

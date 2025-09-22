@@ -34,7 +34,7 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
         }
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + PLAYERS_TABLE + " " +
                 "(uuid VARCHAR(36) PRIMARY KEY, name VARCHAR(16), active VARCHAR(128) NULL, active_level INT, tickets INT, tickets_used INT, " +
-                "till_guaranteed INT));")) {
+                "till_guaranteed INT);")) {
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -76,7 +76,7 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
                 "VALUES (?, ?, ?, ?, ?, ?, ?);")) {
             statement.setString(1, (gPlayer.getUUID() == null ? null : gPlayer.getUUID().toString()));
             statement.setString(2, gPlayer.getName());
-            statement.setString(3, (gPlayer.getActivePerk().getName() == null ? null : gPlayer.getActivePerk().getName()));
+            statement.setString(3, (gPlayer.getActivePerk().getPerk().getName() == null ? null : gPlayer.getActivePerk().getPerk().getName()));
             statement.setInt(4, (gPlayer.getActivePerk() == null ? 0 : gPlayer.getActivePerk().getLevel()));
             statement.setInt(5, gPlayer.getTickets());
             statement.setInt(6, gPlayer.getTicketsUsed());
@@ -178,7 +178,45 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
 
     @Override
     public void updateGPlayerData(GPlayer gPlayer) {
+        if (!connected()) {
+            return;
+        }
+        final String UPDATE_DATA = "INSERT INTO `" + PLAYERS_TABLE + "` (uuid, name, active, active_level, tickets, tickets_used, till_guaranteed) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY " +
+                "UPDATE name = ?, active = ?, active_level = ?, tickets = ?, tickets_used = ?, till_guaranteed = ?;";
 
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement(UPDATE_DATA)) {
+            int i = 1;
+
+            UUID uuid = gPlayer.getUUID();
+            String name = gPlayer.getName();
+            String active = (gPlayer.getActivePerk().getPerk().getName() == null ? null : gPlayer.getActivePerk().getPerk().getName());
+            int active_level = (gPlayer.getActivePerk() == null ? 0 : gPlayer.getActivePerk().getLevel());
+            int tickets = gPlayer.getTickets();
+            int tickets_used = gPlayer.getTicketsUsed();
+            int till_guaranteed = gPlayer.getTillGuaranteed();
+
+            // Setting insert variables
+            statement.setString(i++, (uuid == null ? null : uuid.toString()));
+            statement.setString(i++, name);
+            statement.setString(i++, active);
+            statement.setInt(i++, active_level);
+            statement.setInt(i++, tickets);
+            statement.setInt(i++, tickets_used);
+            statement.setInt(i++, till_guaranteed);
+
+            // Setting update variables
+            statement.setString(i++, name);
+            statement.setString(i++, active);
+            statement.setInt(i++, active_level);
+            statement.setInt(i++, tickets);
+            statement.setInt(i++, tickets_used);
+            statement.setInt(i, till_guaranteed);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            plugin.error("Data Factory: An error occurred while updating player " + gPlayer.getUUID());
+            e.printStackTrace();
+        }
     }
 
     @Override
