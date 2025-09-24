@@ -71,13 +71,22 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
         if (doesGPlayerDataExist(gPlayer.getUUID())) {
             return;
         }
+        String perkName = null;
+        int perkLevel = 0;
+
+        if (gPlayer.getActivePerk() != null) {
+            if (gPlayer.getActivePerk().getPerk() != null) {
+                perkName = gPlayer.getActivePerk().getPerk().getName();
+            }
+            perkLevel = gPlayer.getActivePerk().getLevel();
+        }
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("INSERT INTO " + PLAYERS_TABLE + " " +
                 "(uuid, name, active, active_level, tickets, tickets_used, till_guaranteed) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?);")) {
             statement.setString(1, (gPlayer.getUUID() == null ? null : gPlayer.getUUID().toString()));
             statement.setString(2, gPlayer.getName());
-            statement.setString(3, (gPlayer.getActivePerk().getPerk().getName() == null ? null : gPlayer.getActivePerk().getPerk().getName()));
-            statement.setInt(4, (gPlayer.getActivePerk() == null ? 0 : gPlayer.getActivePerk().getLevel()));
+            statement.setString(3, perkName);
+            statement.setInt(4, perkLevel);
             statement.setInt(5, gPlayer.getTickets());
             statement.setInt(6, gPlayer.getTicketsUsed());
             statement.setInt(7, gPlayer.getTillGuaranteed());
@@ -190,8 +199,17 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
 
             UUID uuid = gPlayer.getUUID();
             String name = gPlayer.getName();
-            String active = (gPlayer.getActivePerk().getPerk().getName() == null ? null : gPlayer.getActivePerk().getPerk().getName());
-            int active_level = (gPlayer.getActivePerk() == null ? 0 : gPlayer.getActivePerk().getLevel());
+
+            String active = null;
+            int active_level = 0;
+
+            if (gPlayer.getActivePerk() != null) {
+                if (gPlayer.getActivePerk().getPerk() != null) {
+                    active = gPlayer.getActivePerk().getPerk().getName();
+                }
+                active_level = gPlayer.getActivePerk().getLevel();
+            }
+
             int tickets = gPlayer.getTickets();
             int tickets_used = gPlayer.getTicketsUsed();
             int till_guaranteed = gPlayer.getTillGuaranteed();
@@ -212,12 +230,14 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
             statement.setInt(i++, tickets);
             statement.setInt(i++, tickets_used);
             statement.setInt(i, till_guaranteed);
+
             statement.executeUpdate();
         } catch (SQLException e) {
             plugin.error("Data Factory: An error occurred while updating player " + gPlayer.getUUID());
             e.printStackTrace();
         }
     }
+
 
     @Override
     public boolean doesGPlayerDataExist(UUID uuid) {

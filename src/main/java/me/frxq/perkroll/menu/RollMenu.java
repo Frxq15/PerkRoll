@@ -27,13 +27,18 @@ public class RollMenu extends GUITemplate {
     }
     public void register() {
         file.getConfigurationSection("ITEMS").getKeys(false).forEach(item -> {
-            int slot = getItemSlot(file, "ITEMS."+item);
+            int slot = getItemSlot(file, "ITEMS." + item);
             HashMap<String, String> placeholders = new HashMap<>();
             placeholders.put("%tickets%", String.valueOf(gPlayer.getTickets()));
-            if(item.equalsIgnoreCase("ROLL_PERK")) {
+
+            if (item.equalsIgnoreCase("ROLL_PERK")) {
                 setItem(slot, createItem(file, "ITEMS." + item, placeholders, gPlayer.getName(), true), p -> {
                     p.getOpenInventory().close();
-                    Bukkit.broadcastMessage("Rolling Perk...");
+                    plugin.getPerkManager().getRandom(p);
+                });
+            } else if (item.equalsIgnoreCase("VIEW_PERKS")) {
+                setItem(slot, createItem(file, "ITEMS." + item, placeholders, gPlayer.getName(), true), p -> {
+                    new PerksMenu(plugin, gPlayer).open(p);
                 });
             } else {
                 setItem(slot, createItem(file, "ITEMS." + item, placeholders, gPlayer.getName(), true));
@@ -41,6 +46,7 @@ public class RollMenu extends GUITemplate {
         });
         setSword();
     }
+
     public void setSword() {
         if(!file.getBoolean("sword.enabled")) return;
 

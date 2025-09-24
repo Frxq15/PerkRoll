@@ -20,3 +20,15 @@ ITEMS:
       - ''
       - '&a&lCLICK HERE'
       - '&2Click here to roll a Tool Perk Ticket'
+  VIEW_PERKS: # keep as VIEW_PERKS
+    SLOT: 21
+    MATERIAL: BOOK
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&e&lView Available Perks'
+    LORE:
+      - '&7Clicking this will show you all the'
+      - '&7available Tool Perks you can get!'
+      - ''
+      - '&a&lCLICK HERE'
+      - '&2Click here to view all available Tool Perks'

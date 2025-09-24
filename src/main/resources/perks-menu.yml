@@ -1,0 +1,25 @@
+ROWS: 5
+TITLE: "&8Perks"
+
+MISC_ITEMS:
+  BASIC_1: # set material as PLAYER_HEAD for textures
+    SLOT: 0
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'https://textures.minecraft.net/texture/553020fa83d9a9d416927edc5aa2531fabecad19332b711837aa7ead1783998e'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&aBasic I'
+    LORE:
+      - '&7Gives you xyz'
+  RETURN: #USE CLOSE_MENU OR RETURN
+    SLOT: 36
+    MATERIAL: ARROW
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&c&lReturn'
+    LORE:
+      - '&7Clicking this will return you to the'
+      - '&7previous menu.'
+      - ''
+      - '&a&lCLICK HERE'
+      - '&2Click here to return to the previous menu'

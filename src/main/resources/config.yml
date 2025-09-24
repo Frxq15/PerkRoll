@@ -14,12 +14,142 @@ tillGuaranteed:
 
 perks:
   attack:
-    rarity: 'Basic'
+    chance: '50'
     levels:
       1:
         chance: '40'
+        display: '&aBasic I'
         boosts:
           1:
             type: 'currency'
             boost: 'Shard'
-            amount: '5' # This is the percentage boost
+            amount: '5'
+      2:
+        chance: '30'
+        display: '&aBasic II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'Shard'
+            amount: '10'
+      3:
+        chance: '20'
+        display: '&aBasic III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'Shard'
+            amount: '15'
+
+  defense:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&bGuardian I'
+        boosts:
+          1:
+            type: 'stat'
+            boost: 'Resistance'
+            amount: '5'
+      2:
+        chance: '25'
+        display: '&bGuardian II'
+        boosts:
+          1:
+            type: 'stat'
+            boost: 'Resistance'
+            amount: '10'
+      3:
+        chance: '15'
+        display: '&bGuardian III'
+        boosts:
+          1:
+            type: 'stat'
+            boost: 'Resistance'
+            amount: '15'
+
+  chance:
+    rarity: '30'
+    levels:
+      1:
+        chance: '25'
+        display: '&dSwift I'
+        boosts:
+          1:
+            type: 'stat'
+            boost: 'Haste'
+            amount: '5'
+      2:
+        chance: '15'
+        display: '&dSwift II'
+        boosts:
+          1:
+            type: 'stat'
+            boost: 'Haste'
+            amount: '10'
+      3:
+        chance: '10'
+        display: '&dSwift III'
+        boosts:
+          1:
+            type: 'stat'
+            boost: 'Haste'
+            amount: '15'
+
+  luck:
+    chance: '30'
+    levels:
+      1:
+        chance: '15'
+        display: '&6Fortune I'
+        boosts:
+          1:
+            type: 'drop'
+            boost: 'Gem'
+            amount: '2'
+      2:
+        chance: '10'
+        display: '&6Fortune II'
+        boosts:
+          1:
+            type: 'drop'
+            boost: 'Gem'
+            amount: '5'
+      3:
+        chance: '5'
+        display: '&6Fortune III'
+        boosts:
+          1:
+            type: 'drop'
+            boost: 'Gem'
+            amount: '10'
+
+  mining:
+    chance: '30'
+    levels:
+      1:
+        chance: '10'
+        display: '&cExcavator I'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'Ore'
+            amount: '10'
+      2:
+        chance: '7'
+        display: '&cExcavator II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'Ore'
+            amount: '20'
+      3:
+        chance: '5'
+        display: '&cExcavator III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'Ore'
+            amount: '30'
+

@@ -41,6 +41,7 @@ public class GiveCommand extends SubCommand {
             }
             gPlayer.addTickets(amount);
             sender.sendMessage(plugin.getLocaleManager().getMessage("TICKETS_ADDED").replace("%amount%", String.valueOf(amount)).replace("%player%", gPlayer.getName()));
+            return;
         }
         plugin.getLocaleManager().sendUsageMessage(sender, getUsage());
     }

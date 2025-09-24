@@ -45,6 +45,10 @@ public class DataFactory {
         return false;
     }
 
+    public void terminate() {
+        if(playerDataFactory != null) playerDataFactory.terminate();
+    }
+
     public void assignStorageMethod() {
         String storageMethod = plugin.getConfig().getString("storage-method");
         if (storageMethod != null) {

@@ -28,7 +28,7 @@ public class PerkCache {
         for (String perkName : perksSection.getKeys(false)) {
             ConfigurationSection perkSection = perksSection.getConfigurationSection(perkName);
 
-            String rarity = perkSection.getString("rarity", "Unknown");
+            double rarity = perkSection.getDouble("chance", 10);
             HashMap<Integer, List<PerkBoost>> boostsByLevel = new HashMap<>();
 
             ConfigurationSection levelsSection = perkSection.getConfigurationSection("levels");
@@ -37,6 +37,7 @@ public class PerkCache {
                     int level = Integer.parseInt(levelKey);
                     ConfigurationSection levelSection = levelsSection.getConfigurationSection(levelKey);
 
+                    String display = levelSection.getString("display", "Unknown");
                     double chance = Double.parseDouble(levelSection.getString("chance", "0"));
 
                     List<PerkBoost> perkBoosts = new ArrayList<>();
@@ -50,7 +51,7 @@ public class PerkCache {
                             String boostTarget = boostSection.getString("boost", "");
                             double amount = Double.parseDouble(boostSection.getString("amount", "0"));
 
-                            perkBoosts.add(new PerkBoost(level, boostType, boostTarget, amount, chance));
+                            perkBoosts.add(new PerkBoost(level, display, boostType, boostTarget, amount, chance));
                         }
                     }
 
@@ -69,7 +70,7 @@ public class PerkCache {
         StringBuilder sb = new StringBuilder();
         for (String perkName : cache.keySet()) {
             Perk perk = cache.get(perkName);
-            sb.append("Perk: ").append(perk.getName()).append(", Rarity: ").append(perk.getRarity()).append("\n");
+            sb.append("Perk: ").append(perk.getName()).append(", Chance: ").append(perk.getChance()).append("\n");
             for (int level : perk.getPerks().keySet()) {
                 sb.append("  Level ").append(level).append(":\n");
                 for (PerkBoost boost : perk.getLevel(level)) {
@@ -81,5 +82,9 @@ public class PerkCache {
             }
         }
         return sb.toString();
+    }
+
+    public HashMap<String, Perk> getAllPerks() {
+        return cache;
     }
 }

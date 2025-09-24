@@ -7,6 +7,7 @@ import me.frxq.perkroll.integration.IntegrationManager;
 import me.frxq.perkroll.manager.LocaleManager;
 import me.frxq.perkroll.menu.GUIListeners;
 import me.frxq.perkroll.perk.PerkCache;
+import me.frxq.perkroll.perk.PerkManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,6 +21,7 @@ public final class PerkRoll extends JavaPlugin {
     private PerkCache perkCache;
     private CommandHandler commandHandler;
     private LocaleManager localeManager;
+    private PerkManager perkManager;
 
     @Override
     public void onEnable() {
@@ -30,6 +32,7 @@ public final class PerkRoll extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if(dataFactory != null) { dataFactory.terminate(); }
     }
     public static PerkRoll getInstance() { return instance; }
 
@@ -62,6 +65,7 @@ public final class PerkRoll extends JavaPlugin {
         }
 
         perkCache = new PerkCache(this);
+        perkManager = new PerkManager(this);
 
         localeManager = new LocaleManager(this);
         localeManager.createLocaleFile();
@@ -78,4 +82,5 @@ public final class PerkRoll extends JavaPlugin {
     public PerkCache getPerkCache() { return perkCache; }
     public CommandHandler getCommandHandler() { return commandHandler; }
     public LocaleManager getLocaleManager() { return localeManager; }
+    public PerkManager getPerkManager() { return perkManager; }
 }

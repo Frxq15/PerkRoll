@@ -4,11 +4,13 @@ public class PerkBoost {
     private final int level;
     private final String boostType;
     private final String boostTarget;
+    private final String display;
     private final double amount;
     private final double chance;
 
-    public PerkBoost(int level, String boostType, String boostTarget, double amount, double chance) {
+    public PerkBoost(int level, String display, String boostType, String boostTarget, double amount, double chance) {
         this.level = level;
+        this.display = display;
         this.boostType = boostType;
         this.boostTarget = boostTarget;
         this.amount = amount;
@@ -20,5 +22,6 @@ public class PerkBoost {
     public String getBoostTarget() { return boostTarget; }
     public double getAmount() { return amount; }
     public double getChance() { return chance; }
+    public String getDisplay() { return display; }
 }
 
