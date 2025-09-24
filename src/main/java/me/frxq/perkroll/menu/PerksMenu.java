@@ -2,8 +2,6 @@ package me.frxq.perkroll.menu;
 
 import me.frxq.perkroll.PerkRoll;
 import me.frxq.perkroll.datafactory.player.GPlayer;
-import me.frxq.perkroll.integration.IntegrationType;
-import me.frxq.perkroll.integration.integrations.EdDungeonsIntegration;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.HashMap;
