@@ -2,15 +2,572 @@ ROWS: 5
 TITLE: "&8Perks"
 
 MISC_ITEMS:
-  BASIC_1: # set material as PLAYER_HEAD for textures
-    SLOT: 0
+  ATTACK: # set material as PLAYER_HEAD for textures
+    SLOT: 10
     MATERIAL: PLAYER_HEAD
-    TEXTURE: 'https://textures.minecraft.net/texture/553020fa83d9a9d416927edc5aa2531fabecad19332b711837aa7ead1783998e'
+    TEXTURE: 'http://textures.minecraft.net/texture/f619f947ef2353903ae9be06ee375b30fa16f2679fdc3ab0188fbbe4500fef4'
     AMOUNT: 1
     GLOW: false
-    NAME: '&aBasic I'
+    NAME: '&a&lAttack Perk'
     LORE:
-      - '&7Gives you xyz'
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fDamage &7Boost.'
+      - '&r'
+      - '&a&lI &7- &fDamage &75%'
+      - '&a&lII &7- &fDamage &710%'
+      - '&a&lIII &7- &fDamage &715%'
+      - '&a&lIV &7- &fDamage &720%'
+      - '&a&lV &7- &fDamage &725%'
+      - '&r'
+      - '&aChance: &f12.5%'
+  SHARD: # set material as PLAYER_HEAD for textures
+    SLOT: 11
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/f619f947ef2353903ae9be06ee375b30fa16f2679fdc3ab0188fbbe4500fef4'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&a&lShard Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fShards &7Boost.'
+      - '&r'
+      - '&a&lI &7- &fShards &75%'
+      - '&a&lII &7- &fShards &710%'
+      - '&a&lIII &7- &fShards &715%'
+      - '&a&lIV &7- &fShards &720%'
+      - '&a&lV &7- &fShards &725%'
+      - '&r'
+      - '&aChance: &f12.5%'
+  MONEY: # set material as PLAYER_HEAD for textures
+    SLOT: 12
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/f619f947ef2353903ae9be06ee375b30fa16f2679fdc3ab0188fbbe4500fef4'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&a&lMoney Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fMoney &7Boost.'
+      - '&r'
+      - '&a&lI &7- &fMoney &75%'
+      - '&a&lII &7- &fMoney &710%'
+      - '&a&lIII &7- &fMoney &715%'
+      - '&a&lIV &7- &fMoney &720%'
+      - '&a&lV &7- &fMoney &725%'
+      - '&r'
+      - '&aChance: &f12.5%'
+  SOULS: # set material as PLAYER_HEAD for textures
+    SLOT: 13
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/f619f947ef2353903ae9be06ee375b30fa16f2679fdc3ab0188fbbe4500fef4'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&a&lSouls Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fSouls &7Boost.'
+      - '&r'
+      - '&a&lI &7- &fSouls &75%'
+      - '&a&lII &7- &fSouls &710%'
+      - '&a&lIII &7- &fSouls &715%'
+      - '&a&lIV &7- &fSouls &720%'
+      - '&a&lV &7- &fSouls &725%'
+      - '&r'
+      - '&aChance: &f12.5%'
+  ESSENCE: # set material as PLAYER_HEAD for textures
+    SLOT: 14
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/f619f947ef2353903ae9be06ee375b30fa16f2679fdc3ab0188fbbe4500fef4'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&a&lEssence Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fEssence &7Boost.'
+      - '&r'
+      - '&a&lI &7- &fEssence &75%'
+      - '&a&lII &7- &fEssence &710%'
+      - '&a&lIII &7- &fEssence &715%'
+      - '&a&lIV &7- &fEssence &720%'
+      - '&a&lV &7- &fEssence &725%'
+      - '&r'
+      - '&aChance: &f12.5%'
+  STRENGTH: # set material as PLAYER_HEAD for textures
+    SLOT: 15
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/f397843fd3a68528a28674169b9b831c1658fb1d86a721826dced50342e325f2'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&b&lStrength Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fDamage &7Boost.'
+      - '&r'
+      - '&b&lI &7- &fDamage &710%'
+      - '&b&lII &7- &fDamage &720%'
+      - '&b&lIII &7- &fDamage &730%'
+      - '&b&lIV &7- &fDamage &740%'
+      - '&b&lV &7- &fDamage &750%'
+      - '&r'
+      - '&bChance: &f5%'
+  GOLDRUSH: # set material as PLAYER_HEAD for textures
+    SLOT: 16
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/f397843fd3a68528a28674169b9b831c1658fb1d86a721826dced50342e325f2'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&b&lGoldrush Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fMoney &7Boost.'
+      - '&r'
+      - '&b&lI &7- &fMoney &710%'
+      - '&b&lII &7- &fMoney &720%'
+      - '&b&lIII &7- &fMoney &730%'
+      - '&b&lIV &7- &fMoney &740%'
+      - '&b&lV &7- &fMoney &750%'
+      - '&r'
+      - '&bChance: &f5%'
+  ANCESTRAL: # set material as PLAYER_HEAD for textures
+    SLOT: 19
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/f397843fd3a68528a28674169b9b831c1658fb1d86a721826dced50342e325f2'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&b&lAncestral Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fSouls &7Boost.'
+      - '&r'
+      - '&b&lI &7- &fSouls &710%'
+      - '&b&lII &7- &fSouls &720%'
+      - '&b&lIII &7- &fSouls &730%'
+      - '&b&lIV &7- &fSouls &740%'
+      - '&b&lV &7- &fSouls &750%'
+      - '&r'
+      - '&bChance: &f5%'
+  SPIRIT: # set material as PLAYER_HEAD for textures
+    SLOT: 20
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/f397843fd3a68528a28674169b9b831c1658fb1d86a721826dced50342e325f2'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&b&lSpirit Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fEssence &7Boost.'
+      - '&r'
+      - '&b&lI &7- &fEssence &710%'
+      - '&b&lII &7- &fEssence &720%'
+      - '&b&lIII &7- &fEssence &730%'
+      - '&b&lIV &7- &fEssence &740%'
+      - '&b&lV &7- &fEssence &750%'
+      - '&r'
+      - '&bChance: &f5%'
+  CRITICAL: # set material as PLAYER_HEAD for textures
+    SLOT: 21
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/f397843fd3a68528a28674169b9b831c1658fb1d86a721826dced50342e325f2'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&b&lCritical Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fCritical &7Boost.'
+      - '&r'
+      - '&9&lI &7- &fCritical &750%'
+      - '&9&lI &7- &fCritical &775%'
+      - '&9&lIII &7- &fCritical &7100%'
+      - '&9&lIV &7- &fCritical &7150%'
+      - '&9&lV &7- &fCritical &7250%'
+      - '&r'
+      - '&9Chance: &f2.5%'
+  BLACKSMITH: # set material as PLAYER_HEAD for textures
+    SLOT: 22
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/366d6c19e4f5051882851a4aead79f0f1f38aa689719b6b330317ea2b8b0e500'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&9&lBlacksmith Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fTool EXP &7Boost.'
+      - '&r'
+      - '&9&lI &7- &fTool EXP &710%'
+      - '&9&lI &7- &fTool EXP &720%'
+      - '&9&lIII &7- &fTool EXP &730%'
+      - '&9&lIV &7- &fTool EXP &740%'
+      - '&9&lV &7- &fTool EXP &750%'
+      - '&r'
+      - '&9Chance: &f2.5%'
+  WIZARD: # set material as PLAYER_HEAD for textures
+    SLOT: 23
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/366d6c19e4f5051882851a4aead79f0f1f38aa689719b6b330317ea2b8b0e500'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&9&lWizard Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fEnchant &7Boost.'
+      - '&r'
+      - '&9&lI &7- &fEnchant &77.5%'
+      - '&9&lI &7- &fEnchant &715%'
+      - '&9&lIII &7- &fEnchant &722.5%'
+      - '&9&lIV &7- &fEnchant &730%'
+      - '&9&lV &7- &fEnchant &737.5%'
+      - '&r'
+      - '&9Chance: &f2.5%'
+  MAGNET: # set material as PLAYER_HEAD for textures
+    SLOT: 24
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/31544bd72605827b9a88023e78368b41e8f83ac5c9e47c82fb196fc672b22a76'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&c&lMagnet Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fEnchant/Tool &7Boost.'
+      - '&r'
+      - '&c&lI &7- &fEnchant &710% &fTool EXP &710%'
+      - '&c&lII &7- &fEnchant &720% &fTool EXP &720%'
+      - '&c&lIII &7- &fEnchant &730% &fTool EXP &730%'
+      - '&c&lIV &7- &fEnchant &740% &fTool EXP &740%'
+      - '&c&lV &7- &fEnchant &750% &fTool EXP &750%'
+      - '&r'
+      - '&cChance: &f1%'
+  DEMON: # set material as PLAYER_HEAD for textures
+    SLOT: 25
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/31544bd72605827b9a88023e78368b41e8f83ac5c9e47c82fb196fc672b22a76'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&c&lDemon Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fDamage/Enchant &7Boost.'
+      - '&r'
+      - '&c&lI &7- &fDamage &77.5% &fEnchant &77.5%'
+      - '&c&lII &7- &fDamage &715% &fEnchant &715%'
+      - '&c&lIII &7- &fDamage &722.5% &fEnchant &722.5%'
+      - '&c&lIV &7- &fDamage &730% &fEnchant &730%'
+      - '&c&lV &7- &fDamage &737.5% &fEnchant &737.5%'
+      - '&r'
+      - '&cChance: &f1%'
+  MERMAID: # set material as PLAYER_HEAD for textures
+    SLOT: 28
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/31544bd72605827b9a88023e78368b41e8f83ac5c9e47c82fb196fc672b22a76'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&c&lMermaid Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fTool/Money &7Boost.'
+      - '&r'
+      - '&c&lI &7- &fTool EXP &725% &fMoney &725%'
+      - '&c&lII &7- &fTool EXP &740% &fMoney &740%'
+      - '&c&lIII &7- &fTool EXP &750% &fMoney &750%'
+      - '&c&lIV &7- &fTool EXP &760% &fMoney &760%'
+      - '&c&lV &7- &fTool EXP &775% &fMoney &775%'
+      - '&r'
+      - '&cChance: &f1%'
+  BANKER: # set material as PLAYER_HEAD for textures
+    SLOT: 29
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/31544bd72605827b9a88023e78368b41e8f83ac5c9e47c82fb196fc672b22a76'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&c&lBanker Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fSouls/Essence &7Boost.'
+      - '&r'
+      - '&c&lI &7- &fSouls &750% &fEssence &750%'
+      - '&c&lII &7- &fSouls &775% &fEssence &775%'
+      - '&c&lIII &7- &fSouls &7100% &fEssence &7100%'
+      - '&c&lIV &7- &fSouls &7125% &fEssence &7125%'
+      - '&c&lV &7- &fSouls &7150% &fEssence &7150%'
+      - '&r'
+      - '&cChance: &f1%'
+  FORTUNE: # set material as PLAYER_HEAD for textures
+    SLOT: 30
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/106ea104cb9be703cced1b1f565286752e271752c5ac85e8113b3e2dc4352c20'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&d&lFortune Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fMoney/Shards/Souls/Essence &7Boost.'
+      - '&r'
+      - '&d&lI &7- &fMoney &750% &fShards &750% &fSouls &775% &fEssence &775%'
+      - '&d&lII &7- &fMoney &775% &fShards &775% &fSouls &7100% &fEssence &7100%'
+      - '&d&lIII &7- &fMoney &7100% &fShards &7100% &fSouls &7150% &fEssence &7150%'
+      - '&d&lIV &7- &fMoney &7125% &fShards &7125% &fSouls &7200% &fEssence &7200%'
+      - '&d&lV &7- &fMoney &7150% &fShards &7150% &fSouls &7250% &fEssence &7250%'
+      - '&r'
+      - '&dChance: &f0.5%'
+  POWER: # set material as PLAYER_HEAD for textures
+    SLOT: 31
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/106ea104cb9be703cced1b1f565286752e271752c5ac85e8113b3e2dc4352c20'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&d&lPower Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fMoney/Damage/Shards &7Boost.'
+      - '&r'
+      - '&d&lI &7- &fMoney &712.5% &fDamage &712.5% &fShards &712.5%'
+      - '&d&lII &7- &fMoney &725% &fDamage &725% &fShards &725%'
+      - '&d&lIII &7- &fMoney &737.5% &fDamage &737.5% &fShards &737.5%'
+      - '&d&lIV &7- &fMoney &750% &fDamage &750% &fShards &750%'
+      - '&d&lV &7- &fMoney &762.5% &fDamage &762.5% &fShards &762.5%'
+      - '&r'
+      - '&dChance: &f0.5%'
+  GODLY: # set material as PLAYER_HEAD for textures
+    SLOT: 32
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/106ea104cb9be703cced1b1f565286752e271752c5ac85e8113b3e2dc4352c20'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&d&lGodly Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fCritical/Damage/Enchant &7Boost.'
+      - '&r'
+      - '&d&lI &7- &fCritical &750% &fDamage &712.5% &fEnchant &720% &fAttack Speed &720%'
+      - '&d&lII &7- &fCritical &7100% &fDamage &725% &fEnchant &740% &fAttack Speed &720%'
+      - '&d&lIII &7- &fCritical &7150% &fDamage &737.5% &fEnchant &760% &fAttack Speed &720%'
+      - '&d&lIV &7- &fCritical &7200% &fDamage &750% &fEnchant &780% &fAttack Speed &720%'
+      - '&d&lV &7- &fCritical &7250% &fDamage &762.5% &fEnchant &7100% &fAttack Speed &720%'
+      - '&r'
+      - '&dChance: &f0.5%'
+  MASTER: # set material as PLAYER_HEAD for textures
+    SLOT: 33
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/106ea104cb9be703cced1b1f565286752e271752c5ac85e8113b3e2dc4352c20'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&d&lMaster Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fEnchant/Damage/Money &7Boost.'
+      - '&r'
+      - '&d&lI &7- &fEnchant &720% &fDamage &725% &fMoney &725% &fAttack Speed &720%'
+      - '&fTool EXP &730%'
+      - '&d&lII &7- &fEnchant &740% &fDamage &737.5% &fMoney &737.5% &fAttack Speed &720%'
+      - '&fTool EXP &760%'
+      - '&d&lIII &7- &fEnchant &760% &fDamage &750% &fMoney &750% &fAttack Speed &720%'
+      - '&fTool EXP &790%'
+      - '&d&lIV &7- &fEnchant &780% &fDamage &762.5% &fMoney &762.5% &fAttack Speed &740%'
+      - '&fTool EXP &7120%'
+      - '&d&lV &7- &fEnchant &7100% &fDamage &775% &fMoney &775% &fAttack Speed &740%'
+      - '&fTool EXP &7150%'
+      - '&r'
+      - '&dChance: &f0.5%'
+  UNIVERSAL: # set material as PLAYER_HEAD for textures
+    SLOT: 34
+    MATERIAL: PLAYER_HEAD
+    TEXTURE: 'http://textures.minecraft.net/texture/6fdcfb400976bf73ec32c1b9962c830fc3d7006d749f8f3da3b6e0fb82909b28'
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&6&lUniversal Perk'
+    LORE:
+      - '&7sᴡᴏʀᴅ ᴘᴇʀᴋ'
+      - '&r'
+      - '&7This sword perk will provide your Sword'
+      - '&7with an additional &fMoney/Enchant/Attack/'
+      - '&fShards/Souls/Tool &7Boost.'
+      - '&r'
+      - '&6&lI &7- &fEnchant &730% &fDamage &712.5% &fMoney &712.5% &fSouls &740% &fEssence &720% &fShards &720% &fTool Exp &720% &fAttack Speed &720%'
+      - '&fEssence &720% &fSouls &740% &fTool EXP &720%'
+      - '&6&lII &7- &fEnchant &760% &fDamage &725% &fMoney &725% &fSouls &780% &fEssence &780% &fShards &740% &fTool Exp &740% &fAttack Speed &720%'
+      - '&6&lIII &7- &fEnchant &790% &fDamage &737.5% &fMoney &737.5% &fSouls &7120% &fEssence &7120% &fShards &760% &fTool Exp &760% &fAttack Speed &740%'
+      - '&6&lIV &7- &fEnchant &7120% &fDamage &760% &fMoney &760% &fSouls &7160% &fEssence &7160% &fShards &780% &fTool Exp &780% &fAttack Speed &740%'
+      - '&6&lV &7- &fEnchant &7150% &fDamage &775% &fMoney &775% &fSouls &7200% &fEssence &7200% &fShards &7100% &fTool Exp &7100% &fAttack Speed &740%'
+      - '&r'
+      - '&6Chance: &f0.1%'
+
+  FILLER1: # set material as PLAYER_HEAD for textures
+    SLOT: 0
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER2: # set material as PLAYER_HEAD for textures
+    SLOT: 1
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER3: # set material as PLAYER_HEAD for textures
+    SLOT: 2
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER4: # set material as PLAYER_HEAD for textures
+    SLOT: 3
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER5: # set material as PLAYER_HEAD for textures
+    SLOT: 4
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER6: # set material as PLAYER_HEAD for textures
+    SLOT: 5
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER7: # set material as PLAYER_HEAD for textures
+    SLOT: 6
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER8: # set material as PLAYER_HEAD for textures
+    SLOT: 7
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER9: # set material as PLAYER_HEAD for textures
+    SLOT: 8
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER10: # set material as PLAYER_HEAD for textures
+    SLOT: 9
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER11: # set material as PLAYER_HEAD for textures
+    SLOT: 17
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER12: # set material as PLAYER_HEAD for textures
+    SLOT: 18
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER13: # set material as PLAYER_HEAD for textures
+    SLOT: 26
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER14: # set material as PLAYER_HEAD for textures
+    SLOT: 27
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER15: # set material as PLAYER_HEAD for textures
+    SLOT: 35
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER16: # set material as PLAYER_HEAD for textures
+    SLOT: 37
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER17: # set material as PLAYER_HEAD for textures
+    SLOT: 38
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER18: # set material as PLAYER_HEAD for textures
+    SLOT: 39
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER19: # set material as PLAYER_HEAD for textures
+    SLOT: 40
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER20: # set material as PLAYER_HEAD for textures
+    SLOT: 41
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER21: # set material as PLAYER_HEAD for textures
+    SLOT: 42
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER22: # set material as PLAYER_HEAD for textures
+    SLOT: 43
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
+  FILLER23: # set material as PLAYER_HEAD for textures
+    SLOT: 44
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&f'
   RETURN: #USE CLOSE_MENU OR RETURN
     SLOT: 36
     MATERIAL: ARROW

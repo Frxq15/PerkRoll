@@ -12,6 +12,14 @@ tillGuaranteed:
   amount: 100
   rarity: 'Master'
 
+sound:
+  enabled: true
+  sound: 'ENTITY_PLAYER_LEVELUP'
+
+shop:
+  currency: 'money'
+  close-on-purchase: true
+
 perks:
   attack:
     chance: '50'

@@ -102,8 +102,7 @@ public class GUITemplate {
         return item;
     }
     public ItemStack createItem(FileConfiguration file, String destination, HashMap<String, String> placeholders, String playerName, boolean placeholderAPI) {
-
-        if (file.getString(destination + ".MATERIAL", "STONE").equalsIgnoreCase("PLAYER_HEAD") && file.contains(destination + ".BASE64")) {
+        if (file.getString(destination + ".MATERIAL", "STONE").equalsIgnoreCase("PLAYER_HEAD") && file.contains(destination + ".TEXTURE")) {
             return createTexturedSkullItem(file, destination, placeholders);
         }
         ItemStack item = new ItemStack(Material.valueOf(file.getString(destination + ".MATERIAL", "STONE")), file.getInt(destination + ".AMOUNT", 1));
@@ -144,10 +143,10 @@ public class GUITemplate {
         PlayerTextures textures = profile.getTextures();
         URL l;
         try {
-            l = new URL(file.getString(destination + ".SKULL-TEXTURE"));
+            l = new URL(file.getString(destination + ".TEXTURE"));
         } catch (MalformedURLException e) {
             l = null;
-            plugin.error("GUI: Failed to load skull texture: " + file.getString(destination + ".SKULL-TEXTURE") + " from file -> " + file.getName());
+            plugin.error("GUI: Failed to load skull texture: " + file.getString(destination + ".TEXTURE") + " from file.");
         }
         textures.setSkin(l);
         meta.setOwnerProfile(profile);

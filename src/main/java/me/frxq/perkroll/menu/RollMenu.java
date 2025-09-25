@@ -7,6 +7,7 @@ import me.frxq.perkroll.integration.integrations.EdDungeonsIntegration;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 public class RollMenu extends GUITemplate {
@@ -33,14 +34,29 @@ public class RollMenu extends GUITemplate {
 
             if (item.equalsIgnoreCase("ROLL_PERK")) {
                 setItem(slot, createItem(file, "ITEMS." + item, placeholders, gPlayer.getName(), true), p -> {
-                    p.getOpenInventory().close();
-                    plugin.getPerkManager().getRandom(p);
+                    if(plugin.getPerkManager().checkRollPurchase(gPlayer)) {
+                        updateRollPerk();
+                    } else {
+                        p.getOpenInventory().close();
+                    }
                 });
             } else if (item.equalsIgnoreCase("VIEW_PERKS")) {
                 setItem(slot, createItem(file, "ITEMS." + item, placeholders, gPlayer.getName(), true), p -> {
                     new PerksMenu(plugin, gPlayer).open(p);
                 });
-            } else {
+            }
+            else if (item.startsWith("SHOP")) {
+                setItem(slot, createItem(file, "ITEMS." + item, placeholders, gPlayer.getName(), true), p -> {
+                    BigDecimal cost = file.getDouble("ITEMS." + item + ".COST") <= 0 ? BigDecimal.ZERO : BigDecimal.valueOf(file.getDouble("ITEMS." + item + ".COST"));
+                    int tickets = file.getInt("ITEMS." + item + ".TICKETS");
+                    plugin.getPerkManager().checkTicketPurchase(gPlayer, cost, tickets);
+                    updateRollPerk();
+                    if(plugin.getConfig().getBoolean("shop.close-on-purchase", true)) {
+                        p.getOpenInventory().close();
+                    }
+                });
+            }
+            else {
                 setItem(slot, createItem(file, "ITEMS." + item, placeholders, gPlayer.getName(), true));
             }
         });
@@ -52,5 +68,17 @@ public class RollMenu extends GUITemplate {
 
         int slot = file.getInt("sword.slot");
         setItem(slot, integration.getSwordAPI().getSwordItemFromPlayer(gPlayer.getPlayer()));
+    }
+    public void updateRollPerk() {
+        int slot = getItemSlot(file, "ITEMS.ROLL_PERK");
+        HashMap<String, String> placeholders = new HashMap<>();
+        placeholders.put("%tickets%", String.valueOf(gPlayer.getTickets()));
+        setItem(slot, createItem(file, "ITEMS.ROLL_PERK", placeholders, gPlayer.getName(), true), p -> {
+            if(plugin.getPerkManager().checkRollPurchase(gPlayer)) {
+                updateRollPerk();
+            } else {
+                p.getOpenInventory().close();
+            }
+        });
     }
 }

@@ -21,14 +21,58 @@ ITEMS:
       - '&a&lCLICK HERE'
       - '&2Click here to roll a Tool Perk Ticket'
   VIEW_PERKS: # keep as VIEW_PERKS
-    SLOT: 21
-    MATERIAL: BOOK
+    SLOT: 20
+    MATERIAL: ENCHANTED_BOOK
     AMOUNT: 1
     GLOW: false
-    NAME: '&e&lView Available Perks'
+    NAME: '&b&lPerks Index'
     LORE:
-      - '&7Clicking this will show you all the'
-      - '&7available Tool Perks you can get!'
+      - '&7Clicking this will show you all available'
+      - '&7perks that can be applied to your tool and'
+      - '&7what functionality they have to the tool'
       - ''
-      - '&a&lCLICK HERE'
-      - '&2Click here to view all available Tool Perks'
+      - '&b&lCLICK HERE'
+      - '&3Click here to view Perks Index Menu'
+
+  SHOP_1: # start with 'SHOP' for shop items
+    SLOT: 39
+    MATERIAL: PAPER
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&e&lPurchase 1 Perk Ticket'
+    COST: 100000
+    TICKETS: 1
+    LORE:
+        - '&7Clicking this will purchase 1 Perk Ticket'
+        - '&7for &a$100,000&7!'
+        - ''
+        - '&a&lCLICK HERE'
+        - '&2Click here to purchase 1 Perk Ticket'
+  SHOP_2:
+    SLOT: 40
+    MATERIAL: PAPER
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&e&lPurchase 5 Perk Tickets'
+    COST: 450000
+    TICKETS: 5
+    LORE:
+        - '&7Clicking this will purchase 5 Perk Tickets'
+        - '&7for &a$450,000&7!'
+        - ''
+        - '&a&lCLICK HERE'
+        - '&2Click here to purchase 5 Perk Tickets'
+  SHOP_3:
+    SLOT: 41
+    MATERIAL: PAPER
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&e&lPurchase 10 Perk Tickets'
+    COST: 800000
+    TICKETS: 10
+    LORE:
+        - '&7Clicking this will purchase 10 Perk Tickets'
+        - '&7for &a$800,000&7!'
+        - ''
+        - '&a&lCLICK HERE'
+        - '&2Click here to purchase 10 Perk Tickets'
