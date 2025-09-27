@@ -47,11 +47,18 @@ public class PerkCache {
                         for (String boostKey : boostsSection.getKeys(false)) {
                             ConfigurationSection boostSection = boostsSection.getConfigurationSection(boostKey);
 
-                            String type = boostSection.getString("type", "unknown");
+                            String type = boostSection.getString("type", "invalid");
+                            PerkType perkType;
+                            try {
+                                perkType = PerkType.valueOf(type.toUpperCase());
+                            } catch (IllegalArgumentException e) {
+                                plugin.warn("Cache: Skipping.. Invalid perk type '" + type + "' in perk '" + perkName + "', level " + level);
+                                perkType = PerkType.INVALID;
+                            }
                             String boostTarget = boostSection.getString("boost", "");
                             double amount = Double.parseDouble(boostSection.getString("amount", "0"));
 
-                            boosts.add(new PerkBoost(type, boostTarget, amount));
+                            boosts.add(new PerkBoost(perkType, boostTarget, amount));
                         }
                     }
 
