@@ -19,7 +19,7 @@ public class GPlayer {
     private int tickets, tillGuaranteed, ticketsUsed;
     private ActivePerk activePerk;
 
-    public GPlayer(PerkRoll plugin, UUID uuid, String name, int tickets, int tillGuaranteed, int ticketsUsed, String activePerk, int activeLevel) {
+    public GPlayer(PerkRoll plugin, UUID uuid, String name, int tickets, int tillGuaranteed, int ticketsUsed) {
         this.plugin = plugin;
         this.uuid = uuid;
         this.name = name;

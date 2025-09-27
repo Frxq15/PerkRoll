@@ -20,6 +20,9 @@ shop:
   currency: 'money'
   close-on-purchase: true
 
+placeholders:
+  none-active: '&cNone'
+
 perks:
   attack:
     chance: '50'

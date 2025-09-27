@@ -7,29 +7,30 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PerkCache {
     private PerkRoll plugin;
-    private HashMap<String, Perk> cache = new HashMap<>();
+    private Map<String, Perk> cache = new HashMap<>();
 
-    private FileConfiguration file;
+    private FileConfiguration config;
 
     public PerkCache(PerkRoll plugin) {
         this.plugin = plugin;
-        this.file = plugin.getConfig();
+        this.config = plugin.getConfig();
         cachePerks();
     }
     public void cachePerks() {
         cache.clear();
 
-        ConfigurationSection perksSection = file.getConfigurationSection("perks");
+        ConfigurationSection perksSection = config.getConfigurationSection("perks");
         if (perksSection == null) return;
 
         for (String perkName : perksSection.getKeys(false)) {
             ConfigurationSection perkSection = perksSection.getConfigurationSection(perkName);
 
-            double rarity = perkSection.getDouble("chance", 10);
-            HashMap<Integer, List<PerkBoost>> boostsByLevel = new HashMap<>();
+            double baseChance = Double.parseDouble(perkSection.getString("chance", "0"));
+            HashMap<Integer, PerkLevel> levels = new HashMap<>();
 
             ConfigurationSection levelsSection = perkSection.getConfigurationSection("levels");
             if (levelsSection != null) {
@@ -37,29 +38,27 @@ public class PerkCache {
                     int level = Integer.parseInt(levelKey);
                     ConfigurationSection levelSection = levelsSection.getConfigurationSection(levelKey);
 
-                    String display = levelSection.getString("display", "Unknown");
-                    double chance = Double.parseDouble(levelSection.getString("chance", "0"));
+                    double levelChance = Double.parseDouble(levelSection.getString("chance", "0"));
+                    String display = levelSection.getString("display", "");
 
-                    List<PerkBoost> perkBoosts = new ArrayList<>();
+                    List<PerkBoost> boosts = new ArrayList<>();
                     ConfigurationSection boostsSection = levelSection.getConfigurationSection("boosts");
-
                     if (boostsSection != null) {
                         for (String boostKey : boostsSection.getKeys(false)) {
                             ConfigurationSection boostSection = boostsSection.getConfigurationSection(boostKey);
 
-                            String boostType = boostSection.getString("type", "unknown");
+                            String type = boostSection.getString("type", "unknown");
                             String boostTarget = boostSection.getString("boost", "");
                             double amount = Double.parseDouble(boostSection.getString("amount", "0"));
 
-                            perkBoosts.add(new PerkBoost(level, display, boostType, boostTarget, amount, chance));
+                            boosts.add(new PerkBoost(type, boostTarget, amount));
                         }
                     }
 
-                    boostsByLevel.put(level, perkBoosts);
+                    levels.put(level, new PerkLevel(level, levelChance, display, boosts));
                 }
             }
-            Perk perk = new Perk(perkName, rarity, boostsByLevel);
-            cache.put(perkName, perk);
+            cache.put(perkName, new Perk(perkName, baseChance, levels));
         }
     }
 
@@ -68,23 +67,27 @@ public class PerkCache {
     }
     public String debugAllPerks() {
         StringBuilder sb = new StringBuilder();
-        for (String perkName : cache.keySet()) {
-            Perk perk = cache.get(perkName);
-            sb.append("Perk: ").append(perk.getName()).append(", Chance: ").append(perk.getChance()).append("\n");
-            for (int level : perk.getPerks().keySet()) {
-                sb.append("  Level ").append(level).append(":\n");
-                for (PerkBoost boost : perk.getLevel(level)) {
+        for (Perk perk : cache.values()) {
+            sb.append("Perk: ").append(perk.getName())
+                    .append(", Base Chance: ").append(perk.getBaseChance()).append("\n");
+
+            for (PerkLevel level : perk.getLevels().values()) {
+                sb.append("  Level ").append(level.getLevel())
+                        .append(" (Chance: ").append(level.getChance())
+                        .append(", Display: ").append(level.getDisplay()).append(")\n");
+
+                for (PerkBoost boost : level.getBoosts()) {
                     sb.append("    - Type: ").append(boost.getBoostType())
-                      .append(", Target: ").append(boost.getBoostTarget())
-                      .append(", Amount: ").append(boost.getAmount())
-                      .append(", Chance: ").append(boost.getChance()).append("\n");
+                            .append(", Target: ").append(boost.getBoostTarget())
+                            .append(", Amount: ").append(boost.getAmount()).append("\n");
                 }
             }
         }
         return sb.toString();
     }
 
-    public HashMap<String, Perk> getAllPerks() {
+
+    public Map<String, Perk> getAllPerks() {
         return cache;
     }
 }

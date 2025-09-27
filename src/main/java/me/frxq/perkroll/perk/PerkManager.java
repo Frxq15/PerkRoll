@@ -24,22 +24,23 @@ public class PerkManager {
         this.cache = plugin.getPerkCache();
         this.integration = (EdDungeonsIntegration) plugin.getIntegrationManager().getIntegration(IntegrationType.EDDUNGEONS);
     }
-    public PerkBoost getRandomPerkBoost() {
+    public ActivePerk getRandomActivePerk() {
         double totalPerkChance = 0;
         for (Perk perk : cache.getAllPerks().values()) {
-            totalPerkChance += perk.getChance();
+            totalPerkChance += perk.getBaseChance();
         }
 
         if (totalPerkChance <= 0) {
             return null;
         }
 
+        // Roll perk
         double perkRoll = Math.random() * totalPerkChance;
         Perk chosenPerk = null;
         double cumulativePerk = 0;
 
         for (Perk perk : cache.getAllPerks().values()) {
-            cumulativePerk += perk.getChance();
+            cumulativePerk += perk.getBaseChance();
             if (perkRoll <= cumulativePerk) {
                 chosenPerk = perk;
                 break;
@@ -50,11 +51,10 @@ public class PerkManager {
             return null;
         }
 
+        // Roll level inside chosen perk
         double totalLevelChance = 0;
-        for (List<PerkBoost> boosts : chosenPerk.getPerks().values()) {
-            for (PerkBoost boost : boosts) {
-                totalLevelChance += boost.getChance();
-            }
+        for (PerkLevel level : chosenPerk.getLevels().values()) {
+            totalLevelChance += level.getChance();
         }
 
         if (totalLevelChance <= 0) {
@@ -63,32 +63,35 @@ public class PerkManager {
 
         double levelRoll = Math.random() * totalLevelChance;
         double cumulativeLevel = 0;
+        PerkLevel chosenLevel = null;
 
-        for (List<PerkBoost> boosts : chosenPerk.getPerks().values()) {
-            for (PerkBoost boost : boosts) {
-                cumulativeLevel += boost.getChance();
-                if (levelRoll <= cumulativeLevel) {
-                    return boost;
-                }
+        for (PerkLevel level : chosenPerk.getLevels().values()) {
+            cumulativeLevel += level.getChance();
+            if (levelRoll <= cumulativeLevel) {
+                chosenLevel = level;
+                break;
             }
         }
-        return null;
-    }
-    public Perk getPerkByBoost(PerkBoost boost) {
-        for (Perk perk : cache.getAllPerks().values()) {
-            for (List<PerkBoost> boosts : perk.getPerks().values()) {
-                if (boosts.contains(boost)) {
-                    return perk;
-                }
-            }
+
+        if (chosenLevel == null) {
+            return null;
         }
-        return null;
+
+        return new ActivePerk(chosenPerk, chosenLevel);
     }
     public void getRandom(Player player) {
-        PerkBoost boost = getRandomPerkBoost();
+        ActivePerk activePerk = getRandomActivePerk();
+        if (activePerk == null) return;
+
         playSound(player);
-        Bukkit.broadcastMessage(ColorFormatter.format("&b"+player.getName()+" &7rolled the " + boost.getDisplay() + " &7sword perk."));
+
+        Bukkit.broadcastMessage(ColorFormatter.format("&b" + player.getName() +
+                " &7rolled the " + activePerk.getDisplay() + " &7sword perk."));
+
+        GPlayer gPlayer = plugin.getDataFactory().getGPlayerDataFactory().getGPlayerData(player.getUniqueId());
+        gPlayer.setActivePerk(activePerk);
     }
+
     public void playSound(Player player) {
         if(plugin.getConfig().getBoolean("sound.enabled")) {
             String soundType = plugin.getConfig().getString("sound.sound");

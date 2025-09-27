@@ -1,23 +1,25 @@
 package me.frxq.perkroll.perk;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ActivePerk {
-
     private final Perk perk;
-    private final int level;
+    private final PerkLevel activeLevel;
 
-    public ActivePerk(Perk perk, int level) {
+    public ActivePerk(Perk perk, PerkLevel activeLevel) {
         this.perk = perk;
-        this.level = level;
+        this.activeLevel = activeLevel;
     }
-    public Perk getPerk() {
-        return perk;
+
+    public Perk getPerk() { return perk; }
+    public PerkLevel getActiveLevel() { return activeLevel; }
+
+    public String getDisplay() {
+        return activeLevel != null ? activeLevel.getDisplay() : "";
     }
-    public int getLevel() {
-        return level;
-    }
+
     public List<PerkBoost> getBoosts() {
-        return perk.getLevel(level);
+        return activeLevel != null ? activeLevel.getBoosts() : Collections.emptyList();
     }
 }

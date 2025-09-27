@@ -1,26 +1,23 @@
 package me.frxq.perkroll.perk;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Perk {
     private final String name;
-    private final double chance;
-    private final HashMap<Integer, List<PerkBoost>> perks;
+    private final double baseChance;
+    private final HashMap<Integer, PerkLevel> levels;
 
-    public Perk(String name, double chance, HashMap<Integer, List<PerkBoost>> perks) {
+    public Perk(String name, double baseChance, HashMap<Integer, PerkLevel> levels) {
         this.name = name;
-        this.chance = chance;
-        this.perks = perks;
+        this.baseChance = baseChance;
+        this.levels = levels;
     }
 
     public String getName() { return name; }
-    public double getChance() { return chance; }
-    public HashMap<Integer, List<PerkBoost>> getPerks() { return perks; }
+    public double getBaseChance() { return baseChance; }
+    public HashMap<Integer, PerkLevel> getLevels() { return levels; }
 
-    public List<PerkBoost> getLevel(int level) {
-        return perks.getOrDefault(level, new ArrayList<>());
+    public PerkLevel getLevel(int level) {
+        return levels.get(level);
     }
-
 }

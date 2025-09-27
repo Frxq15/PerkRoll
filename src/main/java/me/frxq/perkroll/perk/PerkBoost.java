@@ -1,27 +1,17 @@
 package me.frxq.perkroll.perk;
 
 public class PerkBoost {
-    private final int level;
-    private final String boostType;
-    private final String boostTarget;
-    private final String display;
-    private final double amount;
-    private final double chance;
+    private final String boostType;    // "currency", "damage"
+    private final String boostTarget;  // "Shard", "Resistance"
+    private final double amount;       // 5, 10, 15
 
-    public PerkBoost(int level, String display, String boostType, String boostTarget, double amount, double chance) {
-        this.level = level;
-        this.display = display;
+    public PerkBoost(String boostType, String boostTarget, double amount) {
         this.boostType = boostType;
         this.boostTarget = boostTarget;
         this.amount = amount;
-        this.chance = chance;
     }
 
-    public int getLevel() { return level; }
     public String getBoostType() { return boostType; }
     public String getBoostTarget() { return boostTarget; }
     public double getAmount() { return amount; }
-    public double getChance() { return chance; }
-    public String getDisplay() { return display; }
 }
-

@@ -2,6 +2,9 @@ package me.frxq.perkroll.datafactory.player;
 
 import me.frxq.perkroll.PerkRoll;
 import me.frxq.perkroll.datafactory.sql.SQLHandler;
+import me.frxq.perkroll.perk.ActivePerk;
+import me.frxq.perkroll.perk.Perk;
+import me.frxq.perkroll.perk.PerkLevel;
 import org.bukkit.Bukkit;
 
 import java.sql.PreparedStatement;
@@ -78,7 +81,7 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
             if (gPlayer.getActivePerk().getPerk() != null) {
                 perkName = gPlayer.getActivePerk().getPerk().getName();
             }
-            perkLevel = gPlayer.getActivePerk().getLevel();
+            perkLevel = gPlayer.getActivePerk().getActiveLevel().getLevel();
         }
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("INSERT INTO " + PLAYERS_TABLE + " " +
                 "(uuid, name, active, active_level, tickets, tickets_used, till_guaranteed) " +
@@ -144,7 +147,18 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
                 int tickets_used = rs.getInt("tickets_used");
                 int till_guaranteed = rs.getInt("till_guaranteed");
 
-                gPlayer = new GPlayer(plugin, uuidDB, name, tickets, till_guaranteed, tickets_used, active, active_level);
+                ActivePerk activePerk = null;
+                if (active != null) {
+                    Perk perk = plugin.getPerkCache().getPerk(active);
+                    PerkLevel level = perk != null ? perk.getLevel(active_level) : null;
+
+                    if (perk != null && level != null) {
+                        activePerk = new ActivePerk(perk, level);
+                    }
+                }
+
+                gPlayer = new GPlayer(plugin, uuidDB, name, tickets, till_guaranteed, tickets_used);
+                if(activePerk != null) gPlayer.setActivePerk(activePerk);
 
                 if (!players.containsKey(gPlayer.getUUID())) {
                     players.put(gPlayer.getUUID(), gPlayer);
@@ -207,7 +221,7 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
                 if (gPlayer.getActivePerk().getPerk() != null) {
                     active = gPlayer.getActivePerk().getPerk().getName();
                 }
-                active_level = gPlayer.getActivePerk().getLevel();
+                active_level = gPlayer.getActivePerk().getActiveLevel().getLevel();
             }
 
             int tickets = gPlayer.getTickets();
