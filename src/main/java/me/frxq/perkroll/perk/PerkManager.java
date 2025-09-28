@@ -95,6 +95,7 @@ public class PerkManager {
 
         removeAllPerkBoosters(player);
         gPlayer.setActivePerk(active);
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "edd updatesword " + player.getName());
 
         active.getBoosts().forEach(boost -> {
             double multiplier = 1 + (boost.getAmount() / 100.0);
