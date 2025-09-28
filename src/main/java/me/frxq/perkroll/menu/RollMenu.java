@@ -31,11 +31,15 @@ public class RollMenu extends GUITemplate {
             int slot = getItemSlot(file, "ITEMS." + item);
             HashMap<String, String> placeholders = new HashMap<>();
             placeholders.put("%tickets%", String.valueOf(gPlayer.getTickets()));
+            placeholders.put("%tickets_used%", String.valueOf(gPlayer.getTicketsUsed()));
+            placeholders.put("%pity%", String.valueOf(gPlayer.getTillGuaranteed()));
+
 
             if (item.equalsIgnoreCase("ROLL_PERK")) {
                 setItem(slot, createItem(file, "ITEMS." + item, placeholders, gPlayer.getName(), true), p -> {
                     if(plugin.getPerkManager().checkRollPurchase(gPlayer)) {
                         updateRollPerk();
+                        updatePityLuck();
                     } else {
                         p.getOpenInventory().close();
                     }
@@ -69,10 +73,20 @@ public class RollMenu extends GUITemplate {
         int slot = file.getInt("sword.slot");
         setItem(slot, integration.getSwordAPI().getSwordItemFromPlayer(gPlayer.getPlayer()));
     }
+    public void updatePityLuck() {
+        int slot = getItemSlot(file, "ITEMS.PITY_LUCK");
+        HashMap<String, String> placeholders = new HashMap<>();
+        placeholders.put("%tickets%", String.valueOf(gPlayer.getTickets()));
+        placeholders.put("%tickets_used%", String.valueOf(gPlayer.getTicketsUsed()));
+        placeholders.put("%pity%", String.valueOf(gPlayer.getTillGuaranteed()));
+        setItem(slot, createItem(file, "ITEMS.PITY_LUCK", placeholders, gPlayer.getName(), true));
+    }
     public void updateRollPerk() {
         int slot = getItemSlot(file, "ITEMS.ROLL_PERK");
         HashMap<String, String> placeholders = new HashMap<>();
         placeholders.put("%tickets%", String.valueOf(gPlayer.getTickets()));
+        placeholders.put("%tickets_used%", String.valueOf(gPlayer.getTicketsUsed()));
+        placeholders.put("%pity%", String.valueOf(gPlayer.getTillGuaranteed()));
         setItem(slot, createItem(file, "ITEMS.ROLL_PERK", placeholders, gPlayer.getName(), true), p -> {
             if(plugin.getPerkManager().checkRollPurchase(gPlayer)) {
                 updateRollPerk();

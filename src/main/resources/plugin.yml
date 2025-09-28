@@ -8,10 +8,10 @@ softdepend:
   - EdDungeons
 
 commands:
-  test:
-    usage: '/test'
-    description: 'Test command'
   perkroll:
     usage: '/perkroll <subcommand>'
     description: 'Main command for perkroll'
     aliases: [pr]
+  perks:
+    usage: '/perks'
+    description: 'Open the perks menu'

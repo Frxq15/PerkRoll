@@ -1,5 +1,6 @@
+# for support join https://discord.gg/HpznVJjqwy
 #applicable types - "MySQL", "h2"
-storage-method: "MySQL"
+storage-method: "h2"
 database:
   mysql:
     host: "na01-sql.pebblehost.com"
@@ -9,8 +10,14 @@ database:
     password: "Gb6zoJ7cz6cG^4v@MChWiBkc"
 
 tillGuaranteed:
-  amount: 100
-  rarity: 'Master'
+  amount: 10
+  types:
+    attack:
+      min: 3
+      max: 5
+    mermaid:
+      min: 3
+      max: 5
 
 sound:
   enabled: true
@@ -29,138 +36,1303 @@ perks:
     levels:
       1:
         chance: '40'
-        display: '&aBasic I'
+        display: '&l&aAttack I'
         boosts:
           1:
-            type: 'currency'
-            boost: 'Shard'
+            type: 'damage'
+            boost: 'damage'
             amount: '5'
       2:
         chance: '30'
-        display: '&aBasic II'
+        display: '&l&aAttack II'
         boosts:
           1:
-            type: 'currency'
-            boost: 'Shard'
+            type: 'damage'
+            boost: 'damage'
             amount: '10'
       3:
         chance: '20'
-        display: '&aBasic III'
+        display: '&l&aAttack III'
         boosts:
           1:
-            type: 'currency'
-            boost: 'Shard'
+            type: 'damage'
+            boost: 'damage'
             amount: '15'
-
-  defense:
+      4:
+        chance: '10'
+        display: '&l&aAttack IV'
+        boosts:
+          1:
+            type: 'damage'
+            boost: 'damage'
+            amount: '20'
+      5:
+        chance: '5'
+        display: '&l&aAttack V'
+        boosts:
+          1:
+            type: 'damage'
+            boost: 'damage'
+            amount: '25'
+  shard:
     chance: '40'
     levels:
       1:
         chance: '35'
-        display: '&bGuardian I'
+        display: '&l&aShard I'
         boosts:
           1:
-            type: 'stat'
-            boost: 'Resistance'
+            type: 'currency'
+            boost: 'shards'
             amount: '5'
       2:
         chance: '25'
-        display: '&bGuardian II'
+        display: '&l&aShard II'
         boosts:
           1:
-            type: 'stat'
-            boost: 'Resistance'
+            type: 'currency'
+            boost: 'shards'
             amount: '10'
       3:
         chance: '15'
-        display: '&bGuardian III'
+        display: '&l&aShard III'
         boosts:
           1:
-            type: 'stat'
-            boost: 'Resistance'
+            type: 'currency'
+            boost: 'shards'
             amount: '15'
-
-  chance:
-    rarity: '30'
-    levels:
-      1:
-        chance: '25'
-        display: '&dSwift I'
-        boosts:
-          1:
-            type: 'stat'
-            boost: 'Haste'
-            amount: '5'
-      2:
-        chance: '15'
-        display: '&dSwift II'
-        boosts:
-          1:
-            type: 'stat'
-            boost: 'Haste'
-            amount: '10'
-      3:
+      4:
         chance: '10'
-        display: '&dSwift III'
+        display: '&l&aShard IV'
         boosts:
           1:
-            type: 'stat'
-            boost: 'Haste'
-            amount: '15'
-
-  luck:
-    chance: '30'
-    levels:
-      1:
-        chance: '15'
-        display: '&6Fortune I'
-        boosts:
-          1:
-            type: 'drop'
-            boost: 'Gem'
-            amount: '2'
-      2:
-        chance: '10'
-        display: '&6Fortune II'
-        boosts:
-          1:
-            type: 'drop'
-            boost: 'Gem'
-            amount: '5'
-      3:
+            type: 'currency'
+            boost: 'shards'
+            amount: '20'
+      5:
         chance: '5'
-        display: '&6Fortune III'
+        display: '&l&aShard V'
         boosts:
           1:
-            type: 'drop'
-            boost: 'Gem'
-            amount: '10'
-
-  mining:
-    chance: '30'
+            type: 'currency'
+            boost: 'shards'
+            amount: '25'
+  ## Money Perk
+  money:
+    chance: '40'
     levels:
       1:
-        chance: '10'
-        display: '&cExcavator I'
+        chance: '35'
+        display: '&l&aMoney I'
         boosts:
           1:
             type: 'currency'
-            boost: 'Ore'
+            boost: 'money'
+            amount: '5'
+      2:
+        chance: '25'
+        display: '&l&aMoney II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '10'
+      3:
+        chance: '15'
+        display: '&l&aMoney III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '15'
+      4:
+        chance: '10'
+        display: '&l&aMoney IV'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '20'
+      5:
+        chance: '5'
+        display: '&l&aMoney V'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '25'
+
+  souls:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&aSouls I'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '5'
+      2:
+        chance: '25'
+        display: '&l&aSouls II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '10'
+      3:
+        chance: '15'
+        display: '&l&aSouls III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '15'
+      4:
+        chance: '10'
+        display: '&l&aSouls IV'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '20'
+      5:
+        chance: '5'
+        display: '&l&aSouls V'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '25'
+  essence:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&aEssence I'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'essence'
+            amount: '5'
+      2:
+        chance: '25'
+        display: '&l&aEssence II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'essence'
+            amount: '10'
+      3:
+        chance: '15'
+        display: '&l&aEssence III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'essence'
+            amount: '15'
+      4:
+        chance: '10'
+        display: '&l&aEssence IV'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'essence'
+            amount: '20'
+      5:
+        chance: '5'
+        display: '&l&aEssence V'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'essence'
+            amount: '25'
+  strength:
+    chance: '50'
+    levels:
+      1:
+        chance: '40'
+        display: '&l&bStrength I'
+        boosts:
+          1:
+            type: 'damage'
+            boost: 'damage'
             amount: '10'
       2:
-        chance: '7'
-        display: '&cExcavator II'
+        chance: '30'
+        display: '&l&bStrength II'
         boosts:
           1:
-            type: 'currency'
-            boost: 'Ore'
+            type: 'damage'
+            boost: 'damage'
             amount: '20'
       3:
+        chance: '20'
+        display: '&l&bStrength III'
+        boosts:
+          1:
+            type: 'damage'
+            boost: 'damage'
+            amount: '30'
+      4:
+        chance: '10'
+        display: '&l&bStrength IV'
+        boosts:
+          1:
+            type: 'damage'
+            boost: 'damage'
+            amount: '40'
+      5:
         chance: '5'
-        display: '&cExcavator III'
+        display: '&l&bStrength V'
+        boosts:
+          1:
+            type: 'damage'
+            boost: 'damage'
+            amount: '50'
+  goldrush:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&bGoldrush I'
         boosts:
           1:
             type: 'currency'
-            boost: 'Ore'
+            boost: 'money'
+            amount: '10'
+      2:
+        chance: '25'
+        display: '&l&bGoldrush II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '20'
+      3:
+        chance: '15'
+        display: '&l&bGoldrush III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
             amount: '30'
-
+      4:
+        chance: '10'
+        display: '&l&bGoldrush IV'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '40'
+      5:
+        chance: '5'
+        display: '&l&bGoldrush V'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '50'
+  Ancestral:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&bAncestral I'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '10'
+      2:
+        chance: '25'
+        display: '&l&bAncestral II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '20'
+      3:
+        chance: '15'
+        display: '&l&bAncestral III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '30'
+      4:
+        chance: '10'
+        display: '&l&bAncestral IV'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '40'
+      5:
+        chance: '5'
+        display: '&l&bAncestral V'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '50'
+  Spirit:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&bSpirit I'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'essence'
+            amount: '10'
+      2:
+        chance: '25'
+        display: '&l&bSpirit II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'essence'
+            amount: '20'
+      3:
+        chance: '15'
+        display: '&l&bSpirit III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'essence'
+            amount: '30'
+      4:
+        chance: '10'
+        display: '&l&bSpirit IV'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'essence'
+            amount: '40'
+      5:
+        chance: '5'
+        display: '&l&bSpirit V'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'essence'
+            amount: '50'
+  Critical:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&bCritical I'
+        boosts:
+          1:
+            type: 'critical'
+            boost: 'critical'
+            amount: '50'
+      2:
+        chance: '25'
+        display: '&l&bCritical II'
+        boosts:
+          1:
+            type: 'critical'
+            boost: 'critical'
+            amount: '75'
+      3:
+        chance: '15'
+        display: '&l&bCritical III'
+        boosts:
+          1:
+            type: 'critical'
+            boost: 'critical'
+            amount: '100'
+      4:
+        chance: '10'
+        display: '&l&bCritical IV'
+        boosts:
+          1:
+            type: 'critical'
+            boost: 'critical'
+            amount: '150'
+      5:
+        chance: '5'
+        display: '&l&bCritical V'
+        boosts:
+          1:
+            type: 'critical'
+            boost: 'critical'
+            amount: '250'
+  blacksmith:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&9Blacksmith I'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '10'
+      2:
+        chance: '25'
+        display: '&l&9Blacksmith II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '20'
+      3:
+        chance: '15'
+        display: '&l&9Blacksmith III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '30'
+      4:
+        chance: '10'
+        display: '&l&9Blacksmith IV'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '40'
+      5:
+        chance: '5'
+        display: '&l&9Blacksmith V'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '50'
+  wizard:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&9Wizard I'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '7.5'
+      2:
+        chance: '25'
+        display: '&l&9Wizard II'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '15'
+      3:
+        chance: '15'
+        display: '&l&9Wizard III'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '22.5'
+      4:
+        chance: '10'
+        display: '&l&9Wizard IV'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '30'
+      5:
+        chance: '5'
+        display: '&l&9Wizard V'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '37.5'
+  magnet:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&cMagnet I'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '10'
+          2:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '10'
+      2:
+        chance: '25'
+        display: '&l&cMagnet II'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '20'
+          2:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '20'
+      3:
+        chance: '15'
+        display: '&l&cMagnet III'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '30'
+          2:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '30'
+      4:
+        chance: '10'
+        display: '&l&cMagnet IV'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '40'
+          2:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '40'
+      5:
+        chance: '5'
+        display: '&l&cMagnet V'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '50'
+          2:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '50'
+  demon:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&cDemon I'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '7.5'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '7.5'
+      2:
+        chance: '25'
+        display: '&l&cDemon II'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '15'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '15'
+      3:
+        chance: '15'
+        display: '&l&cDemon III'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '22.5'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '22.5'
+      4:
+        chance: '10'
+        display: '&l&cDemon IV'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '30'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '30'
+      5:
+        chance: '5'
+        display: '&l&cDemon V'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '37.5'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '37.5'
+  mermaid:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&cMermaid I'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '25'
+          2:
+            type: 'currency'
+            boost: 'money'
+            amount: '25'
+      2:
+        chance: '25'
+        display: '&l&cMermaid II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '40'
+          2:
+            type: 'currency'
+            boost: 'money'
+            amount: '40'
+      3:
+        chance: '15'
+        display: '&l&cMermaid III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '50'
+          2:
+            type: 'currency'
+            boost: 'money'
+            amount: '50'
+      4:
+        chance: '10'
+        display: '&l&cMermaid IV'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '60'
+          2:
+            type: 'currency'
+            boost: 'money'
+            amount: '60'
+      5:
+        chance: '5'
+        display: '&l&cMermaid V'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '75'
+          2:
+            type: 'currency'
+            boost: 'money'
+            amount: '75'
+  banker:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&cBanker I'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '50'
+          2:
+            type: 'currency'
+            boost: 'essence'
+            amount: '50'
+      2:
+        chance: '25'
+        display: '&l&cBanker II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '75'
+          2:
+            type: 'currency'
+            boost: 'essence'
+            amount: '75'
+      3:
+        chance: '15'
+        display: '&l&cBanker III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '100'
+          2:
+            type: 'currency'
+            boost: 'essence'
+            amount: '100'
+      4:
+        chance: '10'
+        display: '&l&cBanker IV'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '125'
+          2:
+            type: 'currency'
+            boost: 'essence'
+            amount: '125'
+      5:
+        chance: '5'
+        display: '&l&cBanker V'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '150'
+          2:
+            type: 'currency'
+            boost: 'essence'
+            amount: '150'
+  fortune:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&dFortune I'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '75'
+          2:
+            type: 'currency'
+            boost: 'essence'
+            amount: '75'
+          3:
+            type: 'currency'
+            boost: 'money'
+            amount: '50'
+          4:
+            type: 'currency'
+            boost: 'shards'
+            amount: '50'
+      2:
+        chance: '25'
+        display: '&l&dFortune II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '100'
+          2:
+            type: 'currency'
+            boost: 'essence'
+            amount: '100'
+          3:
+            type: 'currency'
+            boost: 'money'
+            amount: '75'
+          4:
+            type: 'currency'
+            boost: 'shards'
+            amount: '75'
+      3:
+        chance: '15'
+        display: '&l&dFortune III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '150'
+          2:
+            type: 'currency'
+            boost: 'essence'
+            amount: '150'
+          3:
+            type: 'currency'
+            boost: 'money'
+            amount: '100'
+          4:
+            type: 'currency'
+            boost: 'shards'
+            amount: '100'
+      4:
+        chance: '10'
+        display: '&l&dFortune IV'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '200'
+          2:
+            type: 'currency'
+            boost: 'essence'
+            amount: '200'
+          3:
+            type: 'currency'
+            boost: 'money'
+            amount: '125'
+          4:
+            type: 'currency'
+            boost: 'shards'
+            amount: '125'
+      5:
+        chance: '5'
+        display: '&l&dFortune V'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'souls'
+            amount: '250'
+          2:
+            type: 'currency'
+            boost: 'essence'
+            amount: '250'
+          3:
+            type: 'currency'
+            boost: 'money'
+            amount: '150'
+          4:
+            type: 'currency'
+            boost: 'shards'
+            amount: '150'
+  power:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&dPower I'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '12.5'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '12.5'
+          3:
+            type: 'currency'
+            boost: 'shards'
+            amount: '12.5'
+      2:
+        chance: '25'
+        display: '&l&dPower II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '25'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '25'
+          3:
+            type: 'currency'
+            boost: 'shards'
+            amount: '25'
+      3:
+        chance: '15'
+        display: '&l&dPower III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '37.5'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '37.5'
+          3:
+            type: 'currency'
+            boost: 'shards'
+            amount: '37.5'
+      4:
+        chance: '10'
+        display: '&l&dPower IV'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '50'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '50'
+          3:
+            type: 'currency'
+            boost: 'shards'
+            amount: '50'
+      5:
+        chance: '5'
+        display: '&l&dPower V'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '62.5'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '62.5'
+          3:
+            type: 'currency'
+            boost: 'shards'
+            amount: '62.5'
+  godly:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&dGodly I'
+        boosts:
+          1:
+            type: 'critical'
+            boost: 'critical'
+            amount: '50'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '12.5'
+          3:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '20'
+      2:
+        chance: '25'
+        display: '&l&dGodly II'
+        boosts:
+          1:
+            type: 'critical'
+            boost: 'critical'
+            amount: '100'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '25'
+          3:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '40'
+      3:
+        chance: '15'
+        display: '&l&dGodly III'
+        boosts:
+          1:
+            type: 'critical'
+            boost: 'critical'
+            amount: '150'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '37.5'
+          3:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '60'
+      4:
+        chance: '10'
+        display: '&l&dGodly IV'
+        boosts:
+          1:
+            type: 'critical'
+            boost: 'critical'
+            amount: '200'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '50'
+          3:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '80'
+      5:
+        chance: '5'
+        display: '&l&dGodly V'
+        boosts:
+          1:
+            type: 'critical'
+            boost: 'critical'
+            amount: '250'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '62.5'
+          3:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '100'
+  master:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&dMaster I'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '20'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '25'
+          3:
+            type: 'currency'
+            boost: 'money'
+            amount: '25'
+          4:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '30'
+      2:
+        chance: '25'
+        display: '&l&dMaster II'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '40'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '37.5'
+          3:
+            type: 'currency'
+            boost: 'money'
+            amount: '37.5'
+          4:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '60'
+      3:
+        chance: '15'
+        display: '&l&dMaster III'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '60'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '50'
+          3:
+            type: 'currency'
+            boost: 'money'
+            amount: '50'
+          4:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '90'
+      4:
+        chance: '10'
+        display: '&l&dMaster IV'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '80'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '62.5'
+          3:
+            type: 'currency'
+            boost: 'money'
+            amount: '62.5'
+          4:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '120'
+      5:
+        chance: '5'
+        display: '&l&dMaster V'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '100'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '75'
+          3:
+            type: 'currency'
+            boost: 'money'
+            amount: '75'
+          4:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '150'
+  universal:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&6Universal I'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '30'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '12.5'
+          3:
+            type: 'currency'
+            boost: 'money'
+            amount: '12.5'
+          4:
+            type: 'currency'
+            boost: 'souls'
+            amount: '40'
+          5:
+            type: 'currency'
+            boost: 'essence'
+            amount: '20'
+          6:
+            type: 'currency'
+            boost: 'shards'
+            amount: '20'
+          7:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '20'
+      2:
+        chance: '25'
+        display: '&l&6Universal II'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '60'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '25'
+          3:
+            type: 'currency'
+            boost: 'money'
+            amount: '25'
+          4:
+            type: 'currency'
+            boost: 'souls'
+            amount: '80'
+          5:
+            type: 'currency'
+            boost: 'essence'
+            amount: '80'
+          6:
+            type: 'currency'
+            boost: 'shards'
+            amount: '40'
+          7:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '40'
+      3:
+        chance: '15'
+        display: '&l&6Universal III'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '90'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '37.5'
+          3:
+            type: 'currency'
+            boost: 'money'
+            amount: '37.5'
+          4:
+            type: 'currency'
+            boost: 'souls'
+            amount: '120'
+          5:
+            type: 'currency'
+            boost: 'essence'
+            amount: '120'
+          6:
+            type: 'currency'
+            boost: 'shards'
+            amount: '60'
+          7:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '60'
+      4:
+        chance: '10'
+        display: '&l&6Universal IV'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '120'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '60'
+          3:
+            type: 'currency'
+            boost: 'money'
+            amount: '60'
+          4:
+            type: 'currency'
+            boost: 'souls'
+            amount: '160'
+          5:
+            type: 'currency'
+            boost: 'essence'
+            amount: '160'
+          6:
+            type: 'currency'
+            boost: 'shards'
+            amount: '80'
+          7:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '80'
+      5:
+        chance: '5'
+        display: '&l&6Universal V'
+        boosts:
+          1:
+            type: 'enchant'
+            boost: 'enchant'
+            amount: '150'
+          2:
+            type: 'damage'
+            boost: 'damage'
+            amount: '75'
+          3:
+            type: 'currency'
+            boost: 'money'
+            amount: '75'
+          4:
+            type: 'currency'
+            boost: 'souls'
+            amount: '200'
+          5:
+            type: 'currency'
+            boost: 'essence'
+            amount: '200'
+          6:
+            type: 'currency'
+            boost: 'shards'
+            amount: '100'
+          7:
+            type: 'currency'
+            boost: 'swordxp'
+            amount: '100'

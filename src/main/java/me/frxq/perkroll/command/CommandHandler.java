@@ -2,6 +2,7 @@ package me.frxq.perkroll.command;
 
 import me.frxq.perkroll.PerkRoll;
 import me.frxq.perkroll.command.commands.PerkRollCommand;
+import me.frxq.perkroll.command.commands.PerksCommand;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
@@ -19,7 +20,7 @@ public class CommandHandler {
 
     private void registerCommands() {
         registerCommand("perkroll", new PerkRollCommand(plugin));
-        plugin.getCommand("test").setExecutor(new testCommand());
+        plugin.getCommand("perks").setExecutor(new PerksCommand());
     }
 
     public void registerCommand(String name, CommandExecutor commandExecutor) {

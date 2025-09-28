@@ -2,7 +2,7 @@ package me.frxq.perkroll;
 
 import me.frxq.perkroll.command.CommandHandler;
 import me.frxq.perkroll.datafactory.DataFactory;
-import me.frxq.perkroll.events.MoneyBoostEvent;
+import me.frxq.perkroll.events.CurrencyBoostListener;
 import me.frxq.perkroll.file.FileManager;
 import me.frxq.perkroll.integration.IntegrationManager;
 import me.frxq.perkroll.manager.LocaleManager;
@@ -80,7 +80,7 @@ public final class PerkRoll extends JavaPlugin {
 
     public void registerListeners() {
         Bukkit.getPluginManager().registerEvents(new GUIListeners(), this);
-        Bukkit.getPluginManager().registerEvents(new MoneyBoostEvent(this), this);
+        Bukkit.getPluginManager().registerEvents(new CurrencyBoostListener(this), this);
     }
 
     public IntegrationManager getIntegrationManager() { return integrationManager; }

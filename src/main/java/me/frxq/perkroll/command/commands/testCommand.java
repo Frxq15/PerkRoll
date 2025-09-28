@@ -1,4 +1,4 @@
-package me.frxq.perkroll.command;
+package me.frxq.perkroll.command.commands;
 
 import me.frxq.perkroll.PerkRoll;
 import me.frxq.perkroll.datafactory.player.GPlayer;
@@ -26,7 +26,6 @@ public class testCommand implements CommandExecutor {
         }
         Player player = (Player) commandSender;
         GPlayer gPlayer = PerkRoll.getInstance().getDataFactory().getGPlayerDataFactory().getGPlayerData(player.getUniqueId());
-        Bukkit.broadcastMessage(gPlayer.getName() + " has " + gPlayer.getTickets() + " tickets.");
         new RollMenu(PerkRoll.getInstance(), gPlayer).open(player);
         return true;
     }

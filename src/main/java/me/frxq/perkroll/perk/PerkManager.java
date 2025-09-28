@@ -9,10 +9,11 @@ import me.frxq.perkroll.integration.integrations.EdDungeonsIntegration;
 import me.frxq.perkroll.util.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.*;
 
 public class PerkManager {
     private final PerkRoll plugin;
@@ -80,16 +81,57 @@ public class PerkManager {
         return new ActivePerk(chosenPerk, chosenLevel);
     }
     public void getRandom(Player player) {
-        ActivePerk activePerk = getRandomActivePerk();
-        if (activePerk == null) return;
+        ActivePerk active;
+        GPlayer gPlayer = plugin.getDataFactory().getGPlayerDataFactory().getGPlayerData(player.getUniqueId());
 
+        if(gPlayer.getTillGuaranteed() >= plugin.getConfig().getInt("tillGuaranteed.amount")) {
+            active = getPityLuckRandom(gPlayer);
+            player.sendMessage(ColorFormatter.format(plugin.getLocaleManager().getMessage("PERK_ROLLED_PITY").replace("%perk%", active.getDisplay())));
+        } else {
+            active = getRandomActivePerk();
+            player.sendMessage(ColorFormatter.format(plugin.getLocaleManager().getMessage("PERK_ROLLED").replace("%perk%", active.getDisplay())));
+        }
         playSound(player);
 
-        Bukkit.broadcastMessage(ColorFormatter.format("&b" + player.getName() +
-                " &7rolled the " + activePerk.getDisplay() + " &7sword perk."));
+        removeAllPerkBoosters(player);
+        gPlayer.setActivePerk(active);
 
-        GPlayer gPlayer = plugin.getDataFactory().getGPlayerDataFactory().getGPlayerData(player.getUniqueId());
-        gPlayer.setActivePerk(activePerk);
+        active.getBoosts().forEach(boost -> {
+            double multiplier = 1 + (boost.getAmount() / 100.0);
+            addBooster(player, boost.getBoostType(), multiplier);
+        });
+    }
+
+
+    public void addBooster(Player player, PerkType type, double multiplier) {
+        switch (type) {
+            case ENCHANT -> addBooster(player, "all-enchants", "Enchantment Booster", "", multiplier, true);
+            case DAMAGE -> addBooster(player, "damage", "Damage Booster", "damage", multiplier, false);
+            case CRITICAL -> addBooster(player, "critical", "Critical Booster", "critical", multiplier, true);
+        }
+    }
+
+    private void addBooster(Player player, String boostID, String name, String target, double value, boolean isEnchant) {
+        integration.getBoosterAPI().addBooster(
+                player.getUniqueId(),
+                boostID,
+                name,
+                target,
+                value,
+                0,       // 0 = infinite duration
+                isEnchant,
+                true     // persist in database
+        );
+    }
+
+    public void removeBooster(Player player, String boostID) {
+        integration.getBoosterAPI().removeBooster(player.getUniqueId(), boostID);
+    }
+
+    public void removeAllPerkBoosters(Player player) {
+        removeBooster(player, "perkroll-damage");
+        removeBooster(player, "perkroll-critical");
+        removeBooster(player, "all-enchants");
     }
 
     public void playSound(Player player) {
@@ -112,7 +154,10 @@ public class PerkManager {
             return false;
         }
         gPlayer.setTickets(gPlayer.getTickets() - 1);
+        gPlayer.addTicketsUsed(1);
+
         getRandom(gPlayer.getPlayer());
+        gPlayer.addTillGuaranteed(1);
         return true;
     }
     public void checkTicketPurchase(GPlayer gPlayer, BigDecimal cost, int amount) {
@@ -147,6 +192,35 @@ public class PerkManager {
                         .replace("%tickets%", String.valueOf(gPlayer.getTickets()))
         );
 
+    }
+    public ActivePerk getPityLuckRandom(GPlayer gPlayer) {
+        ConfigurationSection pityTypes = plugin.getConfig().getConfigurationSection("tillGuaranteed.types");
+
+        if (pityTypes == null || pityTypes.getKeys(false).isEmpty()) {
+            return null;
+        }
+        List<String> availableTypes = new ArrayList<>(pityTypes.getKeys(false));
+        String chosenType = availableTypes.get(new Random().nextInt(availableTypes.size()));
+
+        Perk chosenPerk = cache.getPerk(chosenType);
+        if (chosenPerk == null) {
+            return null;
+        }
+        int min = pityTypes.getInt(chosenType + ".min");
+        int max = pityTypes.getInt(chosenType + ".max");
+
+        int rolledLevel = min + new Random().nextInt((max - min) + 1);
+
+        PerkLevel chosenLevel = chosenPerk.getLevels().get(rolledLevel);
+
+        if (chosenLevel == null) {
+            chosenLevel = chosenPerk.getLevels().values().stream()
+                    .max(Comparator.comparingInt(PerkLevel::getLevel))
+                    .orElse(null);
+        }
+        gPlayer.setTillGuaranteed(0);
+
+        return (chosenLevel != null) ? new ActivePerk(chosenPerk, chosenLevel) : null;
     }
 
 }

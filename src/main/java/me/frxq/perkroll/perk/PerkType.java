@@ -4,7 +4,6 @@ public enum PerkType {
     DAMAGE,
     CURRENCY,
     ENCHANT,
-    ATTACK_SPEED,
     CRITICAL,
     INVALID;
 }

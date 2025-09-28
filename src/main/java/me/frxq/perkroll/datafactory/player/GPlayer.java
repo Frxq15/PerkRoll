@@ -35,7 +35,7 @@ public class GPlayer {
         this.uuid = uuid;
         this.name = name;
         this.tickets = 0;
-        this.tillGuaranteed = 100;
+        this.tillGuaranteed = 0;
         this.ticketsUsed = 0;
         this.activePerk = null;
     }
@@ -62,6 +62,8 @@ public class GPlayer {
     public void setActivePerk(ActivePerk activePerk) {
         this.activePerk = activePerk;
     }
+    public void setTillGuaranteed(int tillGuaranteed) { this.tillGuaranteed = tillGuaranteed; }
+    public void addTillGuaranteed(int amount) { this.tillGuaranteed += amount; }
 
     public int getTickets() {
         return tickets;
@@ -69,6 +71,7 @@ public class GPlayer {
     public int getTicketsUsed() {
         return ticketsUsed;
     }
+    public void addTicketsUsed(int amount) { this.ticketsUsed += amount; }
     public int getTillGuaranteed() {
         return tillGuaranteed;
     }
