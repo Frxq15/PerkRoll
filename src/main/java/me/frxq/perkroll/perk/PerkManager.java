@@ -84,7 +84,7 @@ public class PerkManager {
         ActivePerk active;
         GPlayer gPlayer = plugin.getDataFactory().getGPlayerDataFactory().getGPlayerData(player.getUniqueId());
 
-        if(gPlayer.getTillGuaranteed() >= plugin.getConfig().getInt("tillGuaranteed.amount")) {
+        if(gPlayer.getTillGuaranteed() > plugin.getConfig().getInt("tillGuaranteed.amount")) {
             active = getPityLuckRandom(gPlayer);
             player.sendMessage(ColorFormatter.format(plugin.getLocaleManager().getMessage("PERK_ROLLED_PITY").replace("%perk%", active.getDisplay())));
         } else {
@@ -149,17 +149,20 @@ public class PerkManager {
         }
     }
     public boolean checkRollPurchase(GPlayer gPlayer) {
-        if(gPlayer.getTickets() < 1) {
+        if (gPlayer.getTickets() < 1) {
             plugin.getLocaleManager().sendMessage(gPlayer.getPlayer(), "NOT_ENOUGH_TICKETS");
             return false;
         }
+
         gPlayer.setTickets(gPlayer.getTickets() - 1);
         gPlayer.addTicketsUsed(1);
 
-        getRandom(gPlayer.getPlayer());
         gPlayer.addTillGuaranteed(1);
+
+        getRandom(gPlayer.getPlayer());
         return true;
     }
+
     public void checkTicketPurchase(GPlayer gPlayer, BigDecimal cost, int amount) {
         String currency = plugin.getConfig().getString("shop.currency");
 
