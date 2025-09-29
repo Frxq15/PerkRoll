@@ -48,6 +48,7 @@ public class RollMenu extends GUITemplate {
                             if (plugin.getPerkManager().checkRollPurchase(gPlayer)) {
                                 updateRollPerk();
                                 updatePityLuck();
+                                setSword();
                             } else {
                                 p.getOpenInventory().close();
                             }
