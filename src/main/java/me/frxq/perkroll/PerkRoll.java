@@ -83,6 +83,13 @@ public final class PerkRoll extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new CurrencyBoostListener(this), this);
     }
 
+    public void reload() {
+        if(dataFactory != null) { dataFactory.terminate(); }
+        Bukkit.getScheduler().runTaskLater(this, () -> {
+            registry();
+        }, 40L);
+    }
+
     public IntegrationManager getIntegrationManager() { return integrationManager; }
     public FileManager getFileManager() { return fileManager; }
     public DataFactory getDataFactory() { return dataFactory; }

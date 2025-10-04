@@ -45,7 +45,15 @@ public class RollMenu extends GUITemplate {
                 setItem(slot,
                         createItem(file, "ITEMS." + item, refreshPlaceholders(), gPlayer.getName(), true),
                         p -> {
-                            if (plugin.getPerkManager().checkRollPurchase(gPlayer)) {
+
+                            if(gPlayer.hasActivePerk()) {
+                                if(plugin.getConfig().getStringList("confirm-rarities").contains(gPlayer.getActivePerk().getPerk().getName())) {
+                                    new ConfirmMenu(plugin, gPlayer).open(p);
+                                    return;
+                                }
+                            }
+
+                            if(plugin.getPerkManager().checkRollPurchase(gPlayer)) {
                                 updateRollPerk();
                                 updatePityLuck();
                                 setSword();

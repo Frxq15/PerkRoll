@@ -1,6 +1,7 @@
 package me.frxq.perkroll.command;
 
 import me.frxq.perkroll.PerkRoll;
+import me.frxq.perkroll.command.commands.PayPerksCommand;
 import me.frxq.perkroll.command.commands.PerkRollCommand;
 import me.frxq.perkroll.command.commands.PerksCommand;
 import org.bukkit.command.CommandExecutor;
@@ -21,6 +22,7 @@ public class CommandHandler {
     private void registerCommands() {
         registerCommand("perkroll", new PerkRollCommand(plugin));
         plugin.getCommand("perks").setExecutor(new PerksCommand());
+        plugin.getCommand("payperks").setExecutor(new PayPerksCommand());
     }
 
     public void registerCommand(String name, CommandExecutor commandExecutor) {

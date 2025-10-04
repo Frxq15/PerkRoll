@@ -15,11 +15,14 @@ public class FileManager {
     public FileConfiguration RollMenuConfig;
     public File PerksMenuFile;
     public FileConfiguration PerksMenuConfig;
+    public File ConfirmMenuFile;
+    public FileConfiguration ConfirmMenuConfig;
 
     public FileManager(PerkRoll plugin) {
         this.plugin = plugin;
         createRollMenuFile();
         createPerksMenuFile();
+        createConfirmMenuFile();
     }
     public FileConfiguration getRollMenuFile() {
         return RollMenuConfig;
@@ -71,6 +74,33 @@ public class FileManager {
     public void savePerksMenuFile() {
         try {
             PerksMenuConfig.save(PerksMenuFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public FileConfiguration getConfirmMenuFile() {
+        return ConfirmMenuConfig;
+    }
+
+    public void createConfirmMenuFile() {
+        ConfirmMenuFile = new File(plugin.getDataFolder(), "confirm-menu.yml");
+        if (!ConfirmMenuFile.exists()) {
+            ConfirmMenuFile.getParentFile().mkdirs();
+            plugin.log("File: confirm-menu.yml was created successfully");
+            plugin.saveResource("confirm-menu.yml", false);
+        }
+
+        ConfirmMenuConfig = new YamlConfiguration();
+        try {
+            ConfirmMenuConfig.load(ConfirmMenuFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+    public void reloadConfirmMenuFile() { ConfirmMenuConfig = YamlConfiguration.loadConfiguration(ConfirmMenuFile); }
+    public void saveConfirmMenuFile() {
+        try {
+            ConfirmMenuConfig.save(ConfirmMenuFile);
         } catch (IOException e) {
             e.printStackTrace();
         }

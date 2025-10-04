@@ -15,3 +15,6 @@ commands:
   perks:
     usage: '/perks'
     description: 'Open the perks menu'
+  payperks:
+    usage: '/payperks <player> <amount>'
+    description: 'Pay perks to another player'

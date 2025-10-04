@@ -20,4 +20,5 @@ public class Perk {
     public PerkLevel getLevel(int level) {
         return levels.get(level);
     }
+    public int getMaxLevel() { return levels.size(); }
 }

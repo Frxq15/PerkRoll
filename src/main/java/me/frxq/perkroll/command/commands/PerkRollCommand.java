@@ -4,6 +4,8 @@ import me.frxq.perkroll.PerkRoll;
 import me.frxq.perkroll.command.ParentCommand;
 import me.frxq.perkroll.command.SubCommand;
 import me.frxq.perkroll.command.commands.subcommands.GiveCommand;
+import me.frxq.perkroll.command.commands.subcommands.ReloadCommand;
+import me.frxq.perkroll.command.commands.subcommands.SetCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -14,6 +16,8 @@ public class PerkRollCommand extends ParentCommand {
     public PerkRollCommand(PerkRoll plugin) {
         super(plugin, "perkroll", "perkroll.command.main");
         register(new GiveCommand(plugin));
+        register(new ReloadCommand(plugin));
+        register(new SetCommand(plugin));
     }
 
     @Override

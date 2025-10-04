@@ -19,6 +19,11 @@ tillGuaranteed:
       min: 3
       max: 5
 
+confirm-rarities:
+  - 'attack'
+  - 'universal'
+  - 'godly'
+
 sound:
   enabled: true
   sound: 'ENTITY_PLAYER_LEVELUP'
