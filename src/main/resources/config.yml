@@ -5,9 +5,9 @@ database:
   mysql:
     host: "na01-sql.pebblehost.com"
     port: 3306
-    database: "customer_969304_perkroll"
-    username: "customer_969304_perkroll"
-    password: "Gb6zoJ7cz6cG^4v@MChWiBkc"
+    database: ""
+    username: ""
+    password: ""
 
 tillGuaranteed:
   amount: 10
