@@ -102,6 +102,9 @@ public class GUITemplate {
         return item;
     }
     public ItemStack createItem(FileConfiguration file, String destination, HashMap<String, String> placeholders, String playerName, boolean placeholderAPI) {
+        if(file.contains(destination + ".MODEL-DATA")) {
+            return createModelDataItem(file, destination, placeholders, playerName, placeholderAPI);
+        }
         if (file.getString(destination + ".MATERIAL", "STONE").equalsIgnoreCase("PLAYER_HEAD") && file.contains(destination + ".TEXTURE")) {
             return createTexturedSkullItem(file, destination, placeholders);
         }
@@ -128,6 +131,40 @@ public class GUITemplate {
         if (meta != null) {
             meta.setDisplayName(ColorFormatter.format(name.get()));
             meta.setLore(lore);
+            if(file.getBoolean(destination + ".GLOW", false)) {
+                meta.addEnchant(Enchantment.DURABILITY, 1, false);
+                meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            }
+            item.setItemMeta(meta);
+        }
+        return item;
+    }
+    public ItemStack createModelDataItem(FileConfiguration file, String destination, HashMap<String, String> placeholders, String playerName, boolean placeholderAPI) {
+        ItemStack item = new ItemStack(Material.valueOf(file.getString(destination + ".MATERIAL", "STONE")), file.getInt(destination + ".AMOUNT", 1));
+        ItemMeta meta = item.getItemMeta();
+        int modelData = file.getInt(destination + ".MODEL-DATA", 0);
+        AtomicReference<String> name = new AtomicReference<>(file.getString(destination + ".NAME", "&cInvalid Item Name"));
+        placeholders.forEach((key, value) ->
+                name.set(name.get().replace(key, value))
+        );
+        OfflinePlayer target = Bukkit.getOfflinePlayer(playerName);
+        if(placeholderAPI) {
+            name.set(StringUtils.applyPlaceholders(target, name.get()));
+        }
+        List<String> lore = new ArrayList<>(file.getStringList(destination + ".LORE"));
+        lore.replaceAll(line -> {
+            for (Map.Entry<String, String> entry : placeholders.entrySet()) {
+                line = line.replace(entry.getKey(), entry.getValue());
+                if(placeholderAPI) {
+                    line = StringUtils.applyPlaceholders(target, line);
+                }
+            }
+            return ColorFormatter.format(line);
+        });
+        if (meta != null) {
+            meta.setDisplayName(ColorFormatter.format(name.get()));
+            meta.setLore(lore);
+            meta.setCustomModelData(modelData);
             if(file.getBoolean(destination + ".GLOW", false)) {
                 meta.addEnchant(Enchantment.DURABILITY, 1, false);
                 meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
