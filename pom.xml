@@ -69,11 +69,18 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>es.edwardbelt</groupId>
-            <artifactId>eddungeons-api</artifactId>
+            <groupId>com.edwardbelt</groupId>
+            <artifactId>edprison</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libraries/EdPrison-5.6.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>me.rivaldev.credits.api</groupId>
+            <artifactId>RivalCreditsAPI</artifactId>
             <version>1.0.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libraries/EdDungeons-API.jar</systemPath>
+            <systemPath>${project.basedir}/libraries/RivalCreditsAPI.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>

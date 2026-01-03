@@ -29,7 +29,7 @@ sound:
   sound: 'ENTITY_PLAYER_LEVELUP'
 
 shop:
-  currency: 'money'
+  provider: 'edprison' # use either rivalcredits or edprison - define the specific currency in the shop items
   close-on-purchase: true
 
 placeholders:

@@ -3,27 +3,24 @@ package me.frxq.perkroll.menu;
 import me.frxq.perkroll.PerkRoll;
 import me.frxq.perkroll.datafactory.player.GPlayer;
 import me.frxq.perkroll.integration.IntegrationType;
-import me.frxq.perkroll.integration.integrations.EdDungeonsIntegration;
-import org.bukkit.Bukkit;
+import me.frxq.perkroll.integration.integrations.EdPrisonIntegration;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.Map;
 
 public class RollMenu extends GUITemplate {
     private final PerkRoll plugin;
     private final GPlayer gPlayer;
     private final FileConfiguration file;
-    private final EdDungeonsIntegration integration;
+    private final EdPrisonIntegration integration;
 
     public RollMenu(PerkRoll plugin, GPlayer gPlayer) {
         super(plugin,
                 plugin.getFileManager().getRollMenuFile().getInt("ROWS"),
                 plugin.getFileManager().getRollMenuFile().getString("TITLE"));
         this.plugin = plugin;
-        this.integration = (EdDungeonsIntegration) plugin.getIntegrationManager()
-                .getIntegration(IntegrationType.EDDUNGEONS);
+        this.integration = (EdPrisonIntegration) plugin.getIntegrationManager()
+                .getIntegration(IntegrationType.EDPRISON);
         this.gPlayer = gPlayer;
         this.file = plugin.getFileManager().getRollMenuFile();
         register();
@@ -71,11 +68,10 @@ public class RollMenu extends GUITemplate {
                 setItem(slot,
                         createItem(file, "ITEMS." + item, refreshPlaceholders(), gPlayer.getName(), true),
                         p -> {
-                            BigDecimal cost = file.getDouble("ITEMS." + item + ".COST") <= 0
-                                    ? BigDecimal.ZERO
-                                    : BigDecimal.valueOf(file.getDouble("ITEMS." + item + ".COST"));
+                            double cost = file.getDouble("ITEMS." + item + ".COST");
                             int tickets = file.getInt("ITEMS." + item + ".TICKETS");
-                            plugin.getPerkManager().checkTicketPurchase(gPlayer, cost, tickets);
+                            String currency = file.getString("ITEMS." + item + ".CURRENCY");
+                            plugin.getPerkManager().checkTicketPurchase(gPlayer, currency, cost, tickets);
                             updateRollPerk();
                             if (plugin.getConfig().getBoolean("shop.close-on-purchase", true)) {
                                 p.getOpenInventory().close();

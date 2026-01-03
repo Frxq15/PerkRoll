@@ -53,7 +53,7 @@ public class PerkCache {
                                 perkType = PerkType.valueOf(type.toUpperCase());
                             } catch (IllegalArgumentException e) {
                                 plugin.warn("Cache: Skipping.. Invalid perk type '" + type + "' in perk '" + perkName + "', level " + level);
-                                perkType = PerkType.INVALID;
+                                continue;
                             }
                             String boostTarget = boostSection.getString("boost", "");
                             double amount = Double.parseDouble(boostSection.getString("amount", "0"));

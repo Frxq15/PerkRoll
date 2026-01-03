@@ -5,25 +5,27 @@ import me.frxq.perkroll.datafactory.player.GPlayer;
 import me.frxq.perkroll.format.ColorFormatter;
 import me.frxq.perkroll.format.NumberFormatter;
 import me.frxq.perkroll.integration.IntegrationType;
-import me.frxq.perkroll.integration.integrations.EdDungeonsIntegration;
+import me.frxq.perkroll.integration.integrations.EdPrisonIntegration;
+import me.frxq.perkroll.integration.integrations.RivalCreditsIntegration;
 import me.frxq.perkroll.util.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 public class PerkManager {
     private final PerkRoll plugin;
     private final PerkCache cache;
-    private final EdDungeonsIntegration integration;
+    private final EdPrisonIntegration edp;
+    private final RivalCreditsIntegration rival;
 
     public PerkManager(PerkRoll plugin) {
         this.plugin = plugin;
         this.cache = plugin.getPerkCache();
-        this.integration = (EdDungeonsIntegration) plugin.getIntegrationManager().getIntegration(IntegrationType.EDDUNGEONS);
+        this.edp = (EdPrisonIntegration) plugin.getIntegrationManager().getIntegration(IntegrationType.EDPRISON);
+        this.rival = (RivalCreditsIntegration) plugin.getIntegrationManager().getIntegration(IntegrationType.RIVAL_CREDITS);
     }
     public ActivePerk getRandomActivePerk() {
         double totalPerkChance = 0;
@@ -92,47 +94,8 @@ public class PerkManager {
             player.sendMessage(ColorFormatter.format(plugin.getLocaleManager().getMessage("PERK_ROLLED").replace("%perk%", active.getDisplay())));
         }
         playSound(player);
-
-        removeAllPerkBoosters(player);
         gPlayer.setActivePerk(active);
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "edd updatesword " + player.getName());
-
-        active.getBoosts().forEach(boost -> {
-            double multiplier = 1 + (boost.getAmount() / 100.0);
-            addBooster(player, boost.getBoostType(), multiplier);
-        });
-    }
-
-
-    public void addBooster(Player player, PerkType type, double multiplier) {
-        switch (type) {
-            case ENCHANT -> addBooster(player, "all-enchants", "Enchantment Booster", "", multiplier, true);
-            case DAMAGE -> addBooster(player, "damage", "Damage Booster", "damage", multiplier, false);
-            case CRITICAL -> addBooster(player, "critical", "Critical Booster", "critical", multiplier, true);
-        }
-    }
-
-    private void addBooster(Player player, String boostID, String name, String target, double value, boolean isEnchant) {
-        integration.getBoosterAPI().addBooster(
-                player.getUniqueId(),
-                boostID,
-                name,
-                target,
-                value,
-                0,       // 0 = infinite duration
-                isEnchant,
-                true     // persist in database
-        );
-    }
-
-    public void removeBooster(Player player, String boostID) {
-        integration.getBoosterAPI().removeBooster(player.getUniqueId(), boostID);
-    }
-
-    public void removeAllPerkBoosters(Player player) {
-        removeBooster(player, "perkroll-damage");
-        removeBooster(player, "perkroll-critical");
-        removeBooster(player, "all-enchants");
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "edp updatepickaxe " + player.getName());
     }
 
     public void playSound(Player player) {
@@ -164,34 +127,39 @@ public class PerkManager {
         return true;
     }
 
-    public void checkTicketPurchase(GPlayer gPlayer, BigDecimal cost, int amount) {
-        String currency = plugin.getConfig().getString("shop.currency");
+    public void checkTicketPurchase(GPlayer gPlayer, String currency, double cost, int amount) {
 
-        if (cost.compareTo(BigDecimal.ZERO) <= 0) {
+        if (cost  <= 0) {
             plugin.warn("RollMenu: Invalid cost " + cost + " provided for ticket purchase");
             return;
         }
 
-        BigDecimal balance = integration.getCurrencyAPI().getCurrency(gPlayer.getUUID(), currency);
+        double balance = currency.equals("rivalcredits") ?
+                rival.getCurrencyAmount(gPlayer.getUUID(), currency) :
+                edp.getCurrencyAmount(gPlayer.getUUID(), currency);
 
-        if (balance.compareTo(cost) < 0) {
+        if (balance  < 0) {
             gPlayer.getPlayer().sendMessage(
                     plugin.getLocaleManager().getMessage("NOT_ENOUGH_FUNDS")
                             .replace("%amount%", String.valueOf(amount))
-                            .replace("%cost%", NumberFormatter.formatNumber(cost.longValue()))
+                            .replace("%cost%", NumberFormatter.formatNumber((long)cost))
                             .replace("%currency%", StringUtils.capitalize(currency))
             );
 
             return;
         }
 
-        BigDecimal newBalance = balance.subtract(cost);
-        integration.getCurrencyAPI().setCurrency(gPlayer.getUUID(), currency, newBalance);
+        if(currency.equals("rivalcredits")) {
+            rival.takeCurrency(gPlayer.getUUID(), currency, cost);
+        } else {
+            edp.takeCurrency(gPlayer.getUUID(), currency, cost);
+        }
+
         gPlayer.addTickets(amount);
         gPlayer.getPlayer().sendMessage(
                 plugin.getLocaleManager().getMessage("TICKETS_PURCHASED")
                         .replace("%amount%", String.valueOf(amount))
-                        .replace("%cost%", NumberFormatter.formatNumber(cost.longValue()))
+                        .replace("%cost%", NumberFormatter.formatNumber((long)cost))
                         .replace("%currency%", StringUtils.capitalize(currency))
                         .replace("%tickets%", String.valueOf(gPlayer.getTickets()))
         );

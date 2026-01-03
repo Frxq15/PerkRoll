@@ -2,7 +2,7 @@ package me.frxq.perkroll.command.commands;
 
 import me.frxq.perkroll.PerkRoll;
 import me.frxq.perkroll.datafactory.player.GPlayer;
-import me.frxq.perkroll.integration.integrations.EdDungeonsIntegration;
+import me.frxq.perkroll.integration.integrations.EdPrisonIntegration;
 import me.frxq.perkroll.menu.RollMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -15,7 +15,7 @@ public class testCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         PerkRoll plugin = PerkRoll.getInstance();
         Player p = (Player) commandSender;
-        EdDungeonsIntegration ed = (EdDungeonsIntegration) plugin.getIntegrationManager().getIntegration(me.frxq.perkroll.integration.IntegrationType.EDDUNGEONS);
+        EdPrisonIntegration ed = (EdPrisonIntegration) plugin.getIntegrationManager().getIntegration(me.frxq.perkroll.integration.IntegrationType.EDDUNGEONS);
         if(strings.length == 1) {
             ed.getBoosterAPI().getActiveBoosters(p.getUniqueId()).forEach(Bukkit::broadcastMessage);
             return true;

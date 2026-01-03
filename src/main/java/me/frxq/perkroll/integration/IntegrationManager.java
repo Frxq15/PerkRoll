@@ -1,9 +1,9 @@
 package me.frxq.perkroll.integration;
 
 import me.frxq.perkroll.PerkRoll;
-import me.frxq.perkroll.integration.integrations.EdDungeonsIntegration;
+import me.frxq.perkroll.integration.integrations.EdPrisonIntegration;
 import me.frxq.perkroll.integration.integrations.PlaceholderAPIIntegration;
-import org.bukkit.Bukkit;
+import me.frxq.perkroll.integration.integrations.RivalCreditsIntegration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,8 @@ public class IntegrationManager {
     }
 
     public void registerIntegrations() {
-        registerIntegration(new EdDungeonsIntegration(plugin));
+        registerIntegration(new EdPrisonIntegration(plugin));
+        registerIntegration(new RivalCreditsIntegration(plugin));
         registerIntegration(new PlaceholderAPIIntegration(plugin));
     }
 

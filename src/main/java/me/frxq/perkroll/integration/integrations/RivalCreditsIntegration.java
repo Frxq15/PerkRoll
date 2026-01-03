@@ -1,31 +1,28 @@
 package me.frxq.perkroll.integration.integrations;
 
-import es.edwardbelt.eddungeons.iapi.EdDungeonsAPI;
-import es.edwardbelt.eddungeons.iapi.EdDungeonsBoostersAPI;
-import es.edwardbelt.eddungeons.iapi.EdDungeonsCurrencyAPI;
-import es.edwardbelt.eddungeons.iapi.EdDungeonsSwordAPI;
 import me.frxq.perkroll.PerkRoll;
 import me.frxq.perkroll.integration.Integration;
 import me.frxq.perkroll.integration.IntegrationType;
+import me.rivaldev.credits.CreditAPI;
 import org.bukkit.Bukkit;
 
 import java.util.UUID;
 
-public class EdDungeonsIntegration extends Integration {
+public class RivalCreditsIntegration extends Integration {
     private boolean isEnabled;
 
-    public EdDungeonsIntegration(PerkRoll plugin) {
+    public RivalCreditsIntegration(PerkRoll plugin) {
         super(plugin);
     }
 
     @Override
     public String getName() {
-        return "EdDungeons";
+        return "RivalCredits";
     }
 
     @Override
     public IntegrationType getType() {
-        return IntegrationType.EDDUNGEONS;
+        return IntegrationType.RIVAL_CREDITS;
     }
 
     @Override
@@ -35,7 +32,7 @@ public class EdDungeonsIntegration extends Integration {
 
     @Override
     public void enable() {
-        if (Bukkit.getPluginManager().getPlugin("EdDungeons") != null) {
+        if (Bukkit.getPluginManager().getPlugin("RivalCredits") != null) {
             isEnabled = true;
             plugin.log("Integrations: Enabled " + getName() + " integration");
             return;
@@ -59,14 +56,18 @@ public class EdDungeonsIntegration extends Integration {
         return isEnabled;
     }
 
-    public EdDungeonsCurrencyAPI getCurrencyAPI() {
-        return EdDungeonsAPI.getInstance().getCurrencyAPI();
+    @Override
+    public double getCurrencyAmount(UUID uuid, String currency) {
+        if(!isEnabled()) return 0;
+        return getCreditAPI().getCredits(Bukkit.getOfflinePlayer(uuid));
     }
-    public EdDungeonsBoostersAPI getBoosterAPI() {
-        return EdDungeonsAPI.getInstance().getBoostersAPI();
+    @Override
+    public void takeCurrency(UUID uuid, String currency, double amount) {
+        if(!isEnabled()) return;
+        getCreditAPI().removeCredits(Bukkit.getOfflinePlayer(uuid), amount);
     }
-    public EdDungeonsSwordAPI getSwordAPI() {
-        return EdDungeonsAPI.getInstance().getSwordAPI();
+    public CreditAPI getCreditAPI() {
+        return CreditAPI.getInstance();
     }
 }
 

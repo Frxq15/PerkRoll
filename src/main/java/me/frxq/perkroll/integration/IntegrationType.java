@@ -3,7 +3,8 @@ package me.frxq.perkroll.integration;
 import me.frxq.perkroll.PerkRoll;
 
 public enum IntegrationType {
-    EDDUNGEONS(PerkRoll.getInstance().getIntegrationManager().getIntegrationByName("EdDungeons")),
+    EDPRISON(PerkRoll.getInstance().getIntegrationManager().getIntegrationByName("EdPrison")),
+    RIVAL_CREDITS(PerkRoll.getInstance().getIntegrationManager().getIntegrationByName("RivalCredits")),
     PLACEHOLDERAPI(PerkRoll.getInstance().getIntegrationManager().getIntegrationByName("PlaceholderAPI"));
 
     private final Integration integration;

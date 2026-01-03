@@ -56,11 +56,12 @@ ITEMS:
     AMOUNT: 1
     GLOW: false
     NAME: '&e&lPurchase 1 Perk Ticket'
-    COST: 100000
+    COST: 100
+    CURRENCY: 'rivalcredits' # use rivalcredits for RivalCreditsAPI, anything else will use EDP
     TICKETS: 1
     LORE:
       - '&7Clicking this will purchase 1 Perk Ticket'
-      - '&7for &a$100,000&7!'
+      - '&7for &a100 Credits&7!'
       - ''
       - '&a&lCLICK HERE'
       - '&2Click here to purchase 1 Perk Ticket'
@@ -70,11 +71,12 @@ ITEMS:
     AMOUNT: 1
     GLOW: false
     NAME: '&e&lPurchase 5 Perk Tickets'
-    COST: 450000
+    COST: 450000000
+    CURRENCY: 'tokens'
     TICKETS: 5
     LORE:
       - '&7Clicking this will purchase 5 Perk Tickets'
-      - '&7for &a$450,000&7!'
+      - '&7for &a450M Tokens&7!'
       - ''
       - '&a&lCLICK HERE'
       - '&2Click here to purchase 5 Perk Tickets'
@@ -84,11 +86,12 @@ ITEMS:
     AMOUNT: 1
     GLOW: false
     NAME: '&e&lPurchase 10 Perk Tickets'
-    COST: 800000
+    COST: 750000000
+    CURRENCY: 'tokens'
     TICKETS: 10
     LORE:
       - '&7Clicking this will purchase 10 Perk Tickets'
-      - '&7for &a$800,000&7!'
+      - '&7for &a750M Tokens&7!'
       - ''
       - '&a&lCLICK HERE'
       - '&2Click here to purchase 10 Perk Tickets'

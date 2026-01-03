@@ -4,10 +4,9 @@ import es.edwardbelt.eddungeons.iapi.event.EdDungeonsCurrencyAddEvent;
 import me.frxq.perkroll.PerkRoll;
 import me.frxq.perkroll.datafactory.player.GPlayer;
 import me.frxq.perkroll.integration.IntegrationType;
-import me.frxq.perkroll.integration.integrations.EdDungeonsIntegration;
+import me.frxq.perkroll.integration.integrations.EdPrisonIntegration;
 import me.frxq.perkroll.perk.PerkBoost;
 import me.frxq.perkroll.perk.PerkType;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -15,11 +14,11 @@ import java.math.BigDecimal;
 
 public class CurrencyBoostListener implements Listener {
     private final PerkRoll plugin;
-    private final EdDungeonsIntegration integration;
+    private final EdPrisonIntegration integration;
 
     public CurrencyBoostListener(PerkRoll plugin) {
         this.plugin = plugin;
-        this.integration = (EdDungeonsIntegration) plugin.getIntegrationManager().getIntegration(IntegrationType.EDDUNGEONS);
+        this.integration = (EdPrisonIntegration) plugin.getIntegrationManager().getIntegration(IntegrationType.EDDUNGEONS);
     }
     @EventHandler
     public void onGain(EdDungeonsCurrencyAddEvent event) {
