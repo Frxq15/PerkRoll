@@ -2,6 +2,8 @@ package me.frxq.perkroll.integration;
 
 import me.frxq.perkroll.PerkRoll;
 
+import java.util.UUID;
+
 public abstract class Integration {
     protected final PerkRoll plugin;
 
@@ -13,4 +15,6 @@ public abstract class Integration {
     public abstract void disable();
     public abstract void reload();
     public abstract boolean isEnabled();
+    public abstract double getCurrencyAmount(UUID uuid, String currency);
+    public abstract void takeCurrency(UUID uuid, String currency, double amount);
 }

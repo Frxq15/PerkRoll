@@ -71,11 +71,10 @@ public class RollMenu extends GUITemplate {
                 setItem(slot,
                         createItem(file, "ITEMS." + item, refreshPlaceholders(), gPlayer.getName(), true),
                         p -> {
-                            BigDecimal cost = file.getDouble("ITEMS." + item + ".COST") <= 0
-                                    ? BigDecimal.ZERO
-                                    : BigDecimal.valueOf(file.getDouble("ITEMS." + item + ".COST"));
+                            double cost = file.getDouble("ITEMS." + item + ".COST");
                             int tickets = file.getInt("ITEMS." + item + ".TICKETS");
-                            plugin.getPerkManager().checkTicketPurchase(gPlayer, cost, tickets);
+                            String currency = file.getString("ITEMS." + item + ".CURRENCY", "rivalcredits");
+                            plugin.getPerkManager().checkTicketPurchase(gPlayer, currency, cost, tickets);
                             updateRollPerk();
                             if (plugin.getConfig().getBoolean("shop.close-on-purchase", true)) {
                                 p.getOpenInventory().close();

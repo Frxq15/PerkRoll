@@ -57,10 +57,11 @@ ITEMS:
     GLOW: false
     NAME: '&e&lPurchase 1 Perk Ticket'
     COST: 100000
+    CURRENCY: 'rivalcredits'
     TICKETS: 1
     LORE:
       - '&7Clicking this will purchase 1 Perk Ticket'
-      - '&7for &a$100,000&7!'
+      - '&7for &a100,000&7 Credits!'
       - ''
       - '&a&lCLICK HERE'
       - '&2Click here to purchase 1 Perk Ticket'
@@ -71,10 +72,11 @@ ITEMS:
     GLOW: false
     NAME: '&e&lPurchase 5 Perk Tickets'
     COST: 450000
+    CURRENCY: 'tokens'
     TICKETS: 5
     LORE:
       - '&7Clicking this will purchase 5 Perk Tickets'
-      - '&7for &a$450,000&7!'
+      - '&7for &a450,000&7 Tokens!'
       - ''
       - '&a&lCLICK HERE'
       - '&2Click here to purchase 5 Perk Tickets'
@@ -85,10 +87,11 @@ ITEMS:
     GLOW: false
     NAME: '&e&lPurchase 10 Perk Tickets'
     COST: 800000
+    CURRENCY: 'rivalcredits'
     TICKETS: 10
     LORE:
       - '&7Clicking this will purchase 10 Perk Tickets'
-      - '&7for &a$800,000&7!'
+      - '&7for &a800,000&7 Credits!'
       - ''
       - '&a&lCLICK HERE'
       - '&2Click here to purchase 10 Perk Tickets'

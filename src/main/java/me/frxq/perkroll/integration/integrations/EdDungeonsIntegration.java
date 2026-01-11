@@ -9,6 +9,7 @@ import me.frxq.perkroll.integration.Integration;
 import me.frxq.perkroll.integration.IntegrationType;
 import org.bukkit.Bukkit;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public class EdDungeonsIntegration extends Integration {
@@ -57,6 +58,16 @@ public class EdDungeonsIntegration extends Integration {
     @Override
     public boolean isEnabled() {
         return isEnabled;
+    }
+
+    @Override
+    public double getCurrencyAmount(UUID uuid, String currency) {
+        return getCurrencyAPI().getCurrency(uuid, currency).doubleValue();
+    }
+
+    @Override
+    public void takeCurrency(UUID uuid, String currency, double amount) {
+        getCurrencyAPI().removeCurrency(uuid, currency, BigDecimal.valueOf(amount));
     }
 
     public EdDungeonsCurrencyAPI getCurrencyAPI() {

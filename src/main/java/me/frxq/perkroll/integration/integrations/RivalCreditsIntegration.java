@@ -1,44 +1,40 @@
 package me.frxq.perkroll.integration.integrations;
 
-import me.clip.placeholderapi.PlaceholderAPI;
 import me.frxq.perkroll.PerkRoll;
 import me.frxq.perkroll.integration.Integration;
 import me.frxq.perkroll.integration.IntegrationType;
-import me.frxq.perkroll.integration.Placeholders;
+import me.rivaldev.credits.CreditAPI;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 
 import java.util.UUID;
 
-public class PlaceholderAPIIntegration extends Integration {
+public class RivalCreditsIntegration extends Integration {
     private boolean isEnabled;
-    private Placeholders placeholders;
-    public PlaceholderAPIIntegration(PerkRoll plugin) {
+
+    public RivalCreditsIntegration(PerkRoll plugin) {
         super(plugin);
     }
 
     @Override
     public String getName() {
-        return "PlaceholderAPI";
+        return "RivalCredits";
     }
 
     @Override
     public IntegrationType getType() {
-        return IntegrationType.PLACEHOLDERAPI;
+        return IntegrationType.RIVAL_CREDITS;
     }
 
     @Override
     public void register() {
-        isEnabled = false;
+        enable();
     }
 
     @Override
     public void enable() {
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+        if (Bukkit.getPluginManager().getPlugin("RivalCredits") != null) {
             isEnabled = true;
-            plugin.log("Integrations: Enabling placeholders..");
-            placeholders = new Placeholders(plugin);
-            placeholders.register();
+            plugin.log("Integrations: Enabled " + getName() + " integration");
             return;
         }
         plugin.warn("Integrations: Failed to enable " + getName() + " integration, jar could not be found");
@@ -47,13 +43,12 @@ public class PlaceholderAPIIntegration extends Integration {
 
     @Override
     public void disable() {
-        placeholders.unregister();
         isEnabled = false;
     }
 
     @Override
     public void reload() {
-        enable();
+
     }
 
     @Override
@@ -63,15 +58,15 @@ public class PlaceholderAPIIntegration extends Integration {
 
     @Override
     public double getCurrencyAmount(UUID uuid, String currency) {
-        return 0;
+        if(!isEnabled()) return 0;
+        return getCreditAPI().getCredits(Bukkit.getOfflinePlayer(uuid));
     }
-
     @Override
     public void takeCurrency(UUID uuid, String currency, double amount) {
-
+        if(!isEnabled()) return;
+        getCreditAPI().removeCredits(Bukkit.getOfflinePlayer(uuid), amount);
     }
-
-    public String applyPlaceholders(OfflinePlayer target, String message) {
-        return PlaceholderAPI.setPlaceholders(target, message);
+    public CreditAPI getCreditAPI() {
+        return CreditAPI.getInstance();
     }
 }

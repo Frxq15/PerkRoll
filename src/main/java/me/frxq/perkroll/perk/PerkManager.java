@@ -6,6 +6,7 @@ import me.frxq.perkroll.format.ColorFormatter;
 import me.frxq.perkroll.format.NumberFormatter;
 import me.frxq.perkroll.integration.IntegrationType;
 import me.frxq.perkroll.integration.integrations.EdDungeonsIntegration;
+import me.frxq.perkroll.integration.integrations.RivalCreditsIntegration;
 import me.frxq.perkroll.util.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -19,11 +20,13 @@ public class PerkManager {
     private final PerkRoll plugin;
     private final PerkCache cache;
     private final EdDungeonsIntegration integration;
+    private final RivalCreditsIntegration rival;
 
     public PerkManager(PerkRoll plugin) {
         this.plugin = plugin;
         this.cache = plugin.getPerkCache();
         this.integration = (EdDungeonsIntegration) plugin.getIntegrationManager().getIntegration(IntegrationType.EDDUNGEONS);
+        this.rival = (RivalCreditsIntegration) plugin.getIntegrationManager().getIntegration(IntegrationType.RIVAL_CREDITS);
     }
     public ActivePerk getRandomActivePerk() {
         double totalPerkChance = 0;
@@ -164,34 +167,34 @@ public class PerkManager {
         return true;
     }
 
-    public void checkTicketPurchase(GPlayer gPlayer, BigDecimal cost, int amount) {
-        String currency = plugin.getConfig().getString("shop.currency");
-
-        if (cost.compareTo(BigDecimal.ZERO) <= 0) {
+    public void checkTicketPurchase(GPlayer gPlayer, String currency, double cost, int amount) {
+        if(currency == null || currency.isEmpty()) {
+            plugin.warn("RollMenu: Currency was not specified when checking ticket purchase. Aborting purchase.");
+            return;
+        }
+        if (cost <= 0) {
             plugin.warn("RollMenu: Invalid cost " + cost + " provided for ticket purchase");
             return;
         }
 
-        BigDecimal balance = integration.getCurrencyAPI().getCurrency(gPlayer.getUUID(), currency);
+        double balance = getBalance(gPlayer.getUUID(), currency);
 
-        if (balance.compareTo(cost) < 0) {
+        if (balance < 0 || balance < cost) {
             gPlayer.getPlayer().sendMessage(
                     plugin.getLocaleManager().getMessage("NOT_ENOUGH_FUNDS")
                             .replace("%amount%", String.valueOf(amount))
-                            .replace("%cost%", NumberFormatter.formatNumber(cost.longValue()))
+                            .replace("%cost%", NumberFormatter.formatNumber((long)cost))
                             .replace("%currency%", StringUtils.capitalize(currency))
             );
 
             return;
         }
-
-        BigDecimal newBalance = balance.subtract(cost);
-        integration.getCurrencyAPI().setCurrency(gPlayer.getUUID(), currency, newBalance);
+        takeBalance(gPlayer.getUUID(), currency, cost);
         gPlayer.addTickets(amount);
         gPlayer.getPlayer().sendMessage(
                 plugin.getLocaleManager().getMessage("TICKETS_PURCHASED")
                         .replace("%amount%", String.valueOf(amount))
-                        .replace("%cost%", NumberFormatter.formatNumber(cost.longValue()))
+                        .replace("%cost%", NumberFormatter.formatNumber((long)cost))
                         .replace("%currency%", StringUtils.capitalize(currency))
                         .replace("%tickets%", String.valueOf(gPlayer.getTickets()))
         );
@@ -226,5 +229,17 @@ public class PerkManager {
 
         return (chosenLevel != null) ? new ActivePerk(chosenPerk, chosenLevel) : null;
     }
-
+    public double getBalance(UUID uuid, String currency) {
+        if (currency.toLowerCase().equals("rivalcredits")) {
+            return rival.getCurrencyAmount(uuid, currency);
+        }
+        return integration.getCurrencyAmount(uuid, currency);
+    }
+    public void takeBalance(UUID uuid, String currency, double amount) {
+        if(currency.toLowerCase().equals("rivalcredits")) {
+            rival.takeCurrency(uuid, currency, amount);
+        } else {
+            integration.takeCurrency(uuid, currency, amount);
+        }
+    }
 }

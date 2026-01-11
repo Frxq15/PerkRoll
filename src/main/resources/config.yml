@@ -29,7 +29,6 @@ sound:
   sound: 'ENTITY_PLAYER_LEVELUP'
 
 shop:
-  currency: 'money'
   close-on-purchase: true
 
 placeholders:
