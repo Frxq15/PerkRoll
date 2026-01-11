@@ -2,9 +2,9 @@ package me.frxq.perkroll;
 
 import me.frxq.perkroll.command.CommandHandler;
 import me.frxq.perkroll.datafactory.DataFactory;
-import me.frxq.perkroll.events.CurrencyBoostListener;
 import me.frxq.perkroll.file.FileManager;
 import me.frxq.perkroll.integration.IntegrationManager;
+import me.frxq.perkroll.listener.PerkListener;
 import me.frxq.perkroll.manager.LocaleManager;
 import me.frxq.perkroll.menu.GUIListeners;
 import me.frxq.perkroll.perk.PerkCache;
@@ -80,7 +80,6 @@ public final class PerkRoll extends JavaPlugin {
 
     public void registerListeners() {
         Bukkit.getPluginManager().registerEvents(new GUIListeners(), this);
-        Bukkit.getPluginManager().registerEvents(new CurrencyBoostListener(this), this);
     }
 
     public void reload() {

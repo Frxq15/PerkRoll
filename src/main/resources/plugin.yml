@@ -1,4 +1,4 @@
-name: PerkRoll
+name: PerkRollPrison
 version: '${project.version}'
 main: me.frxq.perkroll.PerkRoll
 api-version: 1.18

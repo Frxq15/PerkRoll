@@ -6,6 +6,7 @@ import com.edwardbelt.edprison.api.models.UtilsModel;
 import me.frxq.perkroll.PerkRoll;
 import me.frxq.perkroll.integration.Integration;
 import me.frxq.perkroll.integration.IntegrationType;
+import me.frxq.perkroll.listener.PerkListener;
 import org.bukkit.Bukkit;
 
 import java.util.UUID;
@@ -36,6 +37,7 @@ public class EdPrisonIntegration extends Integration {
     public void enable() {
         if (Bukkit.getPluginManager().getPlugin("EdPrison") != null) {
             isEnabled = true;
+            Bukkit.getPluginManager().registerEvents(new PerkListener(plugin, getEconomyModel()), plugin);
             plugin.log("Integrations: Enabled " + getName() + " integration");
             return;
         }

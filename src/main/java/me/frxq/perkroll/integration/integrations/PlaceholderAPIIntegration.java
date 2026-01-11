@@ -8,6 +8,8 @@ import me.frxq.perkroll.integration.Placeholders;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
+import java.util.UUID;
+
 public class PlaceholderAPIIntegration extends Integration {
     private boolean isEnabled;
     private Placeholders placeholders;
@@ -58,6 +60,17 @@ public class PlaceholderAPIIntegration extends Integration {
     public boolean isEnabled() {
         return isEnabled;
     }
+
+    @Override
+    public double getCurrencyAmount(UUID uuid, String currency) {
+        return 0;
+    }
+
+    @Override
+    public void takeCurrency(UUID uuid, String currency, double amount) {
+
+    }
+
     public String applyPlaceholders(OfflinePlayer target, String message) {
         return PlaceholderAPI.setPlaceholders(target, message);
     }

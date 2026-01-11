@@ -55,7 +55,7 @@ MISC_ITEMS:
     GLOW: false
     NAME: '%perk%'
     LORE:
-      - '&7Are you sure you want to re-roll this sword perk?'
+      - '&7Are you sure you want to re-roll this pickaxe perk?'
   PANE_1:
     SLOT: 3
     MATERIAL: BLACK_STAINED_GLASS_PANE

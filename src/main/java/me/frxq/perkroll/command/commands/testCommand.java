@@ -15,11 +15,6 @@ public class testCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         PerkRoll plugin = PerkRoll.getInstance();
         Player p = (Player) commandSender;
-        EdPrisonIntegration ed = (EdPrisonIntegration) plugin.getIntegrationManager().getIntegration(me.frxq.perkroll.integration.IntegrationType.EDDUNGEONS);
-        if(strings.length == 1) {
-            ed.getBoosterAPI().getActiveBoosters(p.getUniqueId()).forEach(Bukkit::broadcastMessage);
-            return true;
-        }
         if(strings.length == 2) {
             Bukkit.broadcastMessage(PerkRoll.getInstance().getPerkCache().debugAllPerks());
             return true;

@@ -95,7 +95,7 @@ public class PerkManager {
         }
         playSound(player);
         gPlayer.setActivePerk(active);
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "edp updatepickaxe " + player.getName());
+       // Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "edp updatepickaxe " + player.getName());
     }
 
     public void playSound(Player player) {
@@ -138,7 +138,7 @@ public class PerkManager {
                 rival.getCurrencyAmount(gPlayer.getUUID(), currency) :
                 edp.getCurrencyAmount(gPlayer.getUUID(), currency);
 
-        if (balance  < 0) {
+        if (balance < 0 || balance < cost) {
             gPlayer.getPlayer().sendMessage(
                     plugin.getLocaleManager().getMessage("NOT_ENOUGH_FUNDS")
                             .replace("%amount%", String.valueOf(amount))

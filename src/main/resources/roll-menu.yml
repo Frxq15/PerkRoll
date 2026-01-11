@@ -1,9 +1,5 @@
 ROWS: 5
-TITLE: "&8Tool Perks"
-
-sword:
-  enabled: true
-  slot: 22
+TITLE: "&8Pickaxe Perks"
 
 ITEMS:
   PITY_LUCK: # keep as ROLL_PERK

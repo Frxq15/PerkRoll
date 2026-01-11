@@ -49,11 +49,9 @@ public class RollMenu extends GUITemplate {
                                     return;
                                 }
                             }
-
                             if(plugin.getPerkManager().checkRollPurchase(gPlayer)) {
                                 updateRollPerk();
                                 updatePityLuck();
-                                setSword();
                             } else {
                                 p.getOpenInventory().close();
                             }
@@ -83,15 +81,6 @@ public class RollMenu extends GUITemplate {
                         createItem(file, "ITEMS." + item, refreshPlaceholders(), gPlayer.getName(), true));
             }
         });
-
-        setSword();
-    }
-
-    public void setSword() {
-        if (!file.getBoolean("sword.enabled")) return;
-
-        int slot = file.getInt("sword.slot");
-        setItem(slot, integration.getSwordAPI().getSwordItemFromPlayer(gPlayer.getPlayer()));
     }
 
     public void updatePityLuck() {
