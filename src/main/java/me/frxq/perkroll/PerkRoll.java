@@ -11,10 +11,11 @@ import me.frxq.perkroll.perk.PerkCache;
 import me.frxq.perkroll.perk.PerkManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class PerkRoll extends JavaPlugin {
-    public static PerkRoll instance;
+    private static PerkRoll instance;
 
     private IntegrationManager integrationManager;
     private FileManager fileManager;
@@ -23,6 +24,7 @@ public final class PerkRoll extends JavaPlugin {
     private CommandHandler commandHandler;
     private LocaleManager localeManager;
     private PerkManager perkManager;
+    private boolean listenersRegistered = false;
 
     @Override
     public void onEnable() {
@@ -33,8 +35,10 @@ public final class PerkRoll extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if(dataFactory != null) { dataFactory.terminate(); }
+        if (dataFactory != null) { dataFactory.terminate(); }
+        if (integrationManager != null) { integrationManager.disableAll(); }
     }
+
     public static PerkRoll getInstance() { return instance; }
 
     public void log(String message) {
@@ -52,7 +56,7 @@ public final class PerkRoll extends JavaPlugin {
         integrationManager = new IntegrationManager(this);
         integrationManager.registerIntegrations();
 
-        if(!integrationManager.AllIntegrationsEnabled()) {
+        if (!integrationManager.allRequiredIntegrationsEnabled()) {
             warn("Missing required integrations, Disabling plugin.");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
@@ -60,7 +64,7 @@ public final class PerkRoll extends JavaPlugin {
         fileManager = new FileManager(this);
 
         dataFactory = new DataFactory(this);
-        if(!dataFactory.initialize()) {
+        if (!dataFactory.initialize()) {
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
@@ -74,20 +78,22 @@ public final class PerkRoll extends JavaPlugin {
         commandHandler = new CommandHandler(this);
         commandHandler.load();
 
-        registerListeners();
-
+        if (!listenersRegistered) {
+            registerListeners();
+            listenersRegistered = true;
+        }
     }
 
-    public void registerListeners() {
+    private void registerListeners() {
         Bukkit.getPluginManager().registerEvents(new GUIListeners(), this);
         Bukkit.getPluginManager().registerEvents(new CurrencyBoostListener(this), this);
     }
 
     public void reload() {
-        if(dataFactory != null) { dataFactory.terminate(); }
-        Bukkit.getScheduler().runTaskLater(this, () -> {
-            registry();
-        }, 40L);
+        if (dataFactory != null) { dataFactory.terminate(); }
+        if (integrationManager != null) { integrationManager.disableAll(); }
+        reloadConfig();
+        Bukkit.getScheduler().runTaskLater(this, this::registry, 40L);
     }
 
     public IntegrationManager getIntegrationManager() { return integrationManager; }

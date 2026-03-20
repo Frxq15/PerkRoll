@@ -15,18 +15,18 @@ public class testCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         PerkRoll plugin = PerkRoll.getInstance();
         Player p = (Player) commandSender;
-        EdDungeonsIntegration ed = (EdDungeonsIntegration) plugin.getIntegrationManager().getIntegration(me.frxq.perkroll.integration.IntegrationType.EDDUNGEONS);
-        if(strings.length == 1) {
+        EdDungeonsIntegration ed = plugin.getIntegrationManager().getIntegration(EdDungeonsIntegration.class);
+        if (strings.length == 1) {
             ed.getBoosterAPI().getActiveBoosters(p.getUniqueId()).forEach(Bukkit::broadcastMessage);
             return true;
         }
-        if(strings.length == 2) {
-            Bukkit.broadcastMessage(PerkRoll.getInstance().getPerkCache().debugAllPerks());
+        if (strings.length == 2) {
+            Bukkit.broadcastMessage(plugin.getPerkCache().debugAllPerks());
             return true;
         }
         Player player = (Player) commandSender;
-        GPlayer gPlayer = PerkRoll.getInstance().getDataFactory().getGPlayerDataFactory().getGPlayerData(player.getUniqueId());
-        new RollMenu(PerkRoll.getInstance(), gPlayer).open(player);
+        GPlayer gPlayer = plugin.getDataFactory().getGPlayerDataFactory().getGPlayerData(player.getUniqueId());
+        new RollMenu(plugin, gPlayer).open(player);
         return true;
     }
 }

@@ -38,23 +38,4 @@ public class CommandHandler {
         if (commandExecutor instanceof TabCompleter)
             command.setTabCompleter((TabCompleter) commandExecutor);
     }
-    public void registerSubCommand(String parentCommand, SubCommand subCommand) {
-        CommandExecutor executor = plugin.getCommand(parentCommand).getExecutor();
-
-        if (executor instanceof ParentCommand) {
-            ((ParentCommand) executor).register(subCommand);
-        } else {
-            plugin.error("Command Handler: Failed to register subcommand: " + subCommand.getCommand() + " to " + parentCommand);
-        }
-    }
-    public void unregisterGangSubCommand(String subCommandLabel) {
-        CommandExecutor executor = plugin.getCommand("gang").getExecutor();
-        if (executor instanceof ParentCommand) {
-            ParentCommand parent = (ParentCommand) executor;
-            parent.unregister(subCommandLabel);
-        } else {
-            plugin.error("Failed to unregister subcommand: " + subCommandLabel + " from gang command");
-        }
-    }
-
 }

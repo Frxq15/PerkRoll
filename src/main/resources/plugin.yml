@@ -6,6 +6,8 @@ author: frxq
 description: PerkRoll is an advanced perk rolling system that allows players to customize and enhance their gameplay experience with unique perks and abilities.
 softdepend:
   - EdDungeons
+  - RivalCredits
+  - PlaceholderAPI
 
 commands:
   perkroll:

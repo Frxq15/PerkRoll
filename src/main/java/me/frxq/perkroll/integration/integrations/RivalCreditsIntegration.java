@@ -1,14 +1,14 @@
 package me.frxq.perkroll.integration.integrations;
 
 import me.frxq.perkroll.PerkRoll;
+import me.frxq.perkroll.integration.CurrencyProvider;
 import me.frxq.perkroll.integration.Integration;
-import me.frxq.perkroll.integration.IntegrationType;
 import me.rivaldev.credits.CreditAPI;
 import org.bukkit.Bukkit;
 
 import java.util.UUID;
 
-public class RivalCreditsIntegration extends Integration {
+public class RivalCreditsIntegration extends Integration implements CurrencyProvider {
     private boolean isEnabled;
 
     public RivalCreditsIntegration(PerkRoll plugin) {
@@ -21,13 +21,8 @@ public class RivalCreditsIntegration extends Integration {
     }
 
     @Override
-    public IntegrationType getType() {
-        return IntegrationType.RIVAL_CREDITS;
-    }
-
-    @Override
-    public void register() {
-        enable();
+    public boolean isRequired() {
+        return false;
     }
 
     @Override
@@ -37,7 +32,7 @@ public class RivalCreditsIntegration extends Integration {
             plugin.log("Integrations: Enabled " + getName() + " integration");
             return;
         }
-        plugin.warn("Integrations: Failed to enable " + getName() + " integration, jar could not be found");
+        plugin.warn("Integrations: " + getName() + " not found, skipping");
         isEnabled = false;
     }
 
@@ -47,26 +42,26 @@ public class RivalCreditsIntegration extends Integration {
     }
 
     @Override
-    public void reload() {
-
-    }
-
-    @Override
     public boolean isEnabled() {
         return isEnabled;
     }
 
+    // CurrencyProvider
+
+    @Override
+    public String getCurrencyId() {
+        return "rivalcredits";
+    }
+
     @Override
     public double getCurrencyAmount(UUID uuid, String currency) {
-        if(!isEnabled()) return 0;
-        return getCreditAPI().getCredits(Bukkit.getOfflinePlayer(uuid));
+        if (!isEnabled) return 0;
+        return CreditAPI.getInstance().getCredits(Bukkit.getOfflinePlayer(uuid));
     }
+
     @Override
     public void takeCurrency(UUID uuid, String currency, double amount) {
-        if(!isEnabled()) return;
-        getCreditAPI().removeCredits(Bukkit.getOfflinePlayer(uuid), amount);
-    }
-    public CreditAPI getCreditAPI() {
-        return CreditAPI.getInstance();
+        if (!isEnabled) return;
+        CreditAPI.getInstance().removeCredits(Bukkit.getOfflinePlayer(uuid), amount);
     }
 }

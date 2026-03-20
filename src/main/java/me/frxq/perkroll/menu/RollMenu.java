@@ -2,28 +2,21 @@ package me.frxq.perkroll.menu;
 
 import me.frxq.perkroll.PerkRoll;
 import me.frxq.perkroll.datafactory.player.GPlayer;
-import me.frxq.perkroll.integration.IntegrationType;
-import me.frxq.perkroll.integration.integrations.EdDungeonsIntegration;
-import org.bukkit.Bukkit;
+import me.frxq.perkroll.integration.SwordProvider;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.Map;
 
 public class RollMenu extends GUITemplate {
     private final PerkRoll plugin;
     private final GPlayer gPlayer;
     private final FileConfiguration file;
-    private final EdDungeonsIntegration integration;
 
     public RollMenu(PerkRoll plugin, GPlayer gPlayer) {
         super(plugin,
                 plugin.getFileManager().getRollMenuFile().getInt("ROWS"),
                 plugin.getFileManager().getRollMenuFile().getString("TITLE"));
         this.plugin = plugin;
-        this.integration = (EdDungeonsIntegration) plugin.getIntegrationManager()
-                .getIntegration(IntegrationType.EDDUNGEONS);
         this.gPlayer = gPlayer;
         this.file = plugin.getFileManager().getRollMenuFile();
         register();
@@ -45,15 +38,14 @@ public class RollMenu extends GUITemplate {
                 setItem(slot,
                         createItem(file, "ITEMS." + item, refreshPlaceholders(), gPlayer.getName(), true),
                         p -> {
-
-                            if(gPlayer.hasActivePerk()) {
-                                if(plugin.getConfig().getStringList("confirm-rarities").contains(gPlayer.getActivePerk().getPerk().getName())) {
+                            if (gPlayer.hasActivePerk()) {
+                                if (plugin.getConfig().getStringList("confirm-rarities").contains(gPlayer.getActivePerk().getPerk().getName())) {
                                     new ConfirmMenu(plugin, gPlayer).open(p);
                                     return;
                                 }
                             }
 
-                            if(plugin.getPerkManager().checkRollPurchase(gPlayer)) {
+                            if (plugin.getPerkManager().checkRollPurchase(gPlayer)) {
                                 updateRollPerk();
                                 updatePityLuck();
                                 setSword();
@@ -92,9 +84,10 @@ public class RollMenu extends GUITemplate {
 
     public void setSword() {
         if (!file.getBoolean("sword.enabled")) return;
-
+        SwordProvider swordProvider = plugin.getIntegrationManager().getSwordProvider();
+        if (swordProvider == null) return;
         int slot = file.getInt("sword.slot");
-        setItem(slot, integration.getSwordAPI().getSwordItemFromPlayer(gPlayer.getPlayer()));
+        setItem(slot, swordProvider.getSwordItem(gPlayer.getPlayer()));
     }
 
     public void updatePityLuck() {
