@@ -1,0 +1,165 @@
+# for support join https://discord.gg/HpznVJjqwy
+#applicable types - "MySQL", "h2"
+storage-method: "h2"
+database:
+  mysql:
+    host: "na01-sql.pebblehost.com"
+    port: 3306
+    database: ""
+    username: ""
+    password: ""
+
+tillGuaranteed:
+  amount: 10
+  types:
+    money:
+      min: 3
+      max: 5
+    mermaid:
+      min: 3
+      max: 5
+
+confirm-rarities:
+  - 'money'
+
+sound:
+  enabled: true
+  sound: 'ENTITY_PLAYER_LEVELUP'
+
+shop:
+  close-on-purchase: true
+
+placeholders:
+  none-active: '&cNone'
+
+perks:
+  ## Money Perk
+  money:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&aMoney I'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '5'
+      2:
+        chance: '25'
+        display: '&l&aMoney II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '10'
+      3:
+        chance: '15'
+        display: '&l&aMoney III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '15'
+      4:
+        chance: '10'
+        display: '&l&aMoney IV'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '20'
+      5:
+        chance: '5'
+        display: '&l&aMoney V'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'money'
+            amount: '25'
+  souls:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&aSouls I'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'tokens'
+            amount: '5'
+      2:
+        chance: '25'
+        display: '&l&aSouls II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'tokens'
+            amount: '10'
+      3:
+        chance: '15'
+        display: '&l&aSouls III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'tokens'
+            amount: '15'
+      4:
+        chance: '10'
+        display: '&l&aSouls IV'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'tokens'
+            amount: '20'
+      5:
+        chance: '5'
+        display: '&l&aSouls V'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'tokens'
+            amount: '25'
+  mermaid:
+    chance: '40'
+    levels:
+      1:
+        chance: '35'
+        display: '&l&cMermaid I'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'tokens'
+            amount: '25'
+      2:
+        chance: '25'
+        display: '&l&cMermaid II'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'tokens'
+            amount: '40'
+      3:
+        chance: '15'
+        display: '&l&cMermaid III'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'tokens'
+            amount: '50'
+      4:
+        chance: '10'
+        display: '&l&cMermaid IV'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'tokens'
+            amount: '60'
+      5:
+        chance: '5'
+        display: '&l&cMermaid V'
+        boosts:
+          1:
+            type: 'currency'
+            boost: 'tokens'
+            amount: '75'

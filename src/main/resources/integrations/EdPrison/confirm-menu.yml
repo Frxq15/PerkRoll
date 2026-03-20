@@ -1,0 +1,106 @@
+ROWS: 3
+TITLE: "&8Confirm Roll"
+
+ITEMS:
+  CONFIRM:
+    SLOTS:
+      - 0
+      - 1
+      - 2
+      - 9
+      - 10
+      - 11
+      - 18
+      - 19
+      - 20
+    MATERIAL: LIME_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&a&lConfirm Reroll'
+    LORE:
+      - '&fThis will confirm the re-roll of your sword perk'
+      - ''
+      - '&c&lWarning: &fOnce a perk is rerolled, this'
+      - '&faction is irreversible and cannot be undone.'
+      - ''
+      - '&e&lClick &fto confirm this action'
+  DECLINE:
+    SLOTS:
+      - 6
+      - 7
+      - 8
+      - 15
+      - 16
+      - 17
+      - 24
+      - 25
+      - 26
+    MATERIAL: RED_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&c&lCancel Reroll'
+    LORE:
+      - '&fThis will cancel the re-roll of your sword perk'
+      - ''
+      - '&c&lWarning: &fOnce a perk is rerolled, this'
+      - '&faction is irreversible and cannot be undone.'
+      - ''
+      - '&e&lClick &fto cancel this action'
+
+MISC_ITEMS:
+  PERK:
+    SLOT: 13
+    MATERIAL: LIME_DYE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '%perk%'
+    LORE:
+      - '&7Are you sure you want to re-roll this pickaxe perk?'
+  PANE_1:
+    SLOT: 3
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+  PANE_2:
+    SLOT: 4
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+  PANE_3:
+    SLOT: 5
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+  PANE_4:
+    SLOT: 12
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+  PANE_5:
+    SLOT: 14
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+  PANE_6:
+    SLOT: 21
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+  PANE_7:
+    SLOT: 22
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+  PANE_8:
+    SLOT: 23
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
