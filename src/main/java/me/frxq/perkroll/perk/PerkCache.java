@@ -17,7 +17,7 @@ public class PerkCache {
 
     public PerkCache(PerkRoll plugin) {
         this.plugin = plugin;
-        this.config = plugin.getConfig();
+        this.config = plugin.getFileManager().getIntegrationConfig();
         cachePerks();
     }
     public void cachePerks() {

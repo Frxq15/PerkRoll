@@ -4,17 +4,10 @@ import me.frxq.perkroll.PerkRoll;
 import me.frxq.perkroll.format.ColorFormatter;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-
-import java.io.File;
-import java.io.IOException;
 
 public class LocaleManager {
-    private PerkRoll plugin;
-    public File localeFile;
-    public FileConfiguration localeConfig;
+    private final PerkRoll plugin;
 
     public LocaleManager(PerkRoll plugin) {
         this.plugin = plugin;
@@ -47,28 +40,7 @@ public class LocaleManager {
         return ColorFormatter.format(getLocaleFile().getString(message));
     }
 
-    public void createLocaleFile() {
-        localeFile = new File(plugin.getDataFolder(), "locale.yml");
-        if (!localeFile.exists()) {
-            localeFile.getParentFile().mkdirs();
-            plugin.log("File: locale.yml was created successfully");
-            plugin.saveResource("locale.yml", false);
-        }
-
-        localeConfig = new YamlConfiguration();
-        try {
-            localeConfig.load(localeFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
+    public FileConfiguration getLocaleFile() {
+        return plugin.getFileManager().getLocaleFile();
     }
-    public void reloadLocaleFile() { localeConfig = YamlConfiguration.loadConfiguration(localeFile); }
-    public void saveLocaleFile() {
-        try {
-            localeConfig.save(localeFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public FileConfiguration getLocaleFile() { return localeConfig; }
 }

@@ -10,6 +10,7 @@ import me.frxq.perkroll.integration.IntegrationManager;
 import me.frxq.perkroll.util.StringUtils;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -23,6 +24,10 @@ public class PerkManager {
         this.plugin = plugin;
         this.cache = plugin.getPerkCache();
         this.integrationManager = plugin.getIntegrationManager();
+    }
+
+    private FileConfiguration getIntegrationConfig() {
+        return plugin.getFileManager().getIntegrationConfig();
     }
 
     public ActivePerk getRandomActivePerk() {
@@ -75,7 +80,7 @@ public class PerkManager {
         ActivePerk active;
         GPlayer gPlayer = plugin.getDataFactory().getGPlayerDataFactory().getGPlayerData(player.getUniqueId());
 
-        if (gPlayer.getTillGuaranteed() > plugin.getConfig().getInt("tillGuaranteed.amount")) {
+        if (gPlayer.getTillGuaranteed() > getIntegrationConfig().getInt("tillGuaranteed.amount")) {
             active = getPityLuckRandom(gPlayer);
             player.sendMessage(ColorFormatter.format(plugin.getLocaleManager().getMessage("PERK_ROLLED_PITY").replace("%perk%", active.getDisplay())));
         } else {
@@ -166,7 +171,7 @@ public class PerkManager {
     }
 
     public ActivePerk getPityLuckRandom(GPlayer gPlayer) {
-        ConfigurationSection pityTypes = plugin.getConfig().getConfigurationSection("tillGuaranteed.types");
+        ConfigurationSection pityTypes = getIntegrationConfig().getConfigurationSection("tillGuaranteed.types");
 
         if (pityTypes == null || pityTypes.getKeys(false).isEmpty()) return null;
 
@@ -190,5 +195,9 @@ public class PerkManager {
         gPlayer.setTillGuaranteed(0);
 
         return (chosenLevel != null) ? new ActivePerk(chosenPerk, chosenLevel) : null;
+    }
+
+    public List<String> getConfirmRarities() {
+        return getIntegrationConfig().getStringList("confirm-rarities");
     }
 }

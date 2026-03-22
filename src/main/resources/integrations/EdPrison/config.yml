@@ -1,13 +1,5 @@
-# for support join https://discord.gg/HpznVJjqwy
-#applicable types - "MySQL", "h2"
-storage-method: "h2"
-database:
-  mysql:
-    host: "na01-sql.pebblehost.com"
-    port: 3306
-    database: ""
-    username: ""
-    password: ""
+# EdPrison integration config
+# Perks, pity luck, and confirm rarities specific to EdPrison (pickaxe perks)
 
 tillGuaranteed:
   amount: 10
@@ -21,16 +13,6 @@ tillGuaranteed:
 
 confirm-rarities:
   - 'money'
-
-sound:
-  enabled: true
-  sound: 'ENTITY_PLAYER_LEVELUP'
-
-shop:
-  close-on-purchase: true
-
-placeholders:
-  none-active: '&cNone'
 
 perks:
   ## Money Perk

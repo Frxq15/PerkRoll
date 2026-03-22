@@ -31,7 +31,7 @@ public class EdDungeonsIntegration extends Integration implements CurrencyProvid
 
     @Override
     public boolean isRequired() {
-        return true;
+        return false;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class EdDungeonsIntegration extends Integration implements CurrencyProvid
             plugin.log("Integrations: Enabled " + getName() + " integration");
             return;
         }
-        plugin.warn("Integrations: Failed to enable " + getName() + " integration, jar could not be found");
+        plugin.warn("Integrations: " + getName() + " not found, skipping");
         isEnabled = false;
     }
 

@@ -1,13 +1,5 @@
-# for support join https://discord.gg/HpznVJjqwy
-#applicable types - "MySQL", "h2"
-storage-method: "h2"
-database:
-  mysql:
-    host: "na01-sql.pebblehost.com"
-    port: 3306
-    database: ""
-    username: ""
-    password: ""
+# EdDungeons integration config
+# Perks, pity luck, and confirm rarities specific to EdDungeons (sword perks)
 
 tillGuaranteed:
   amount: 10
@@ -23,16 +15,6 @@ confirm-rarities:
   - 'attack'
   - 'universal'
   - 'godly'
-
-sound:
-  enabled: true
-  sound: 'ENTITY_PLAYER_LEVELUP'
-
-shop:
-  close-on-purchase: true
-
-placeholders:
-  none-active: '&cNone'
 
 perks:
   attack:

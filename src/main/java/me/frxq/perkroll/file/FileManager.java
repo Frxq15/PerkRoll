@@ -7,102 +7,165 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 
 public class FileManager {
-    private PerkRoll plugin;
+    private final PerkRoll plugin;
+    private final String integrationName;
 
-    public File RollMenuFile;
-    public FileConfiguration RollMenuConfig;
-    public File PerksMenuFile;
-    public FileConfiguration PerksMenuConfig;
-    public File ConfirmMenuFile;
-    public FileConfiguration ConfirmMenuConfig;
+    private File integrationConfigFile;
+    private FileConfiguration integrationConfig;
+    private File rollMenuFile;
+    private FileConfiguration rollMenuConfig;
+    private File perksMenuFile;
+    private FileConfiguration perksMenuConfig;
+    private File confirmMenuFile;
+    private FileConfiguration confirmMenuConfig;
+    private File localeFile;
+    private FileConfiguration localeConfig;
 
-    public FileManager(PerkRoll plugin) {
+    public FileManager(PerkRoll plugin, String integrationName) {
         this.plugin = plugin;
+        this.integrationName = integrationName;
+        createIntegrationConfigFile();
         createRollMenuFile();
         createPerksMenuFile();
         createConfirmMenuFile();
-    }
-    public FileConfiguration getRollMenuFile() {
-        return RollMenuConfig;
+        createLocaleFile();
     }
 
-    public void createRollMenuFile() {
-        RollMenuFile = new File(plugin.getDataFolder(), "roll-menu.yml");
-        if (!RollMenuFile.exists()) {
-            RollMenuFile.getParentFile().mkdirs();
-            plugin.log("File: roll-menu.yml was created successfully");
-            plugin.saveResource("roll-menu.yml", false);
-        }
-
-        RollMenuConfig = new YamlConfiguration();
-        try {
-            RollMenuConfig.load(RollMenuFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
+    private File getIntegrationFolder() {
+        return new File(plugin.getDataFolder(), "integrations" + File.separator + integrationName);
     }
-    public void reloadRollMenuFile() { RollMenuConfig = YamlConfiguration.loadConfiguration(RollMenuFile); }
-    public void saveRollMenuFile() {
-        try {
-            RollMenuConfig.save(RollMenuFile);
+
+    private void saveIntegrationResource(String resourceName, File targetFile) {
+        if (targetFile.exists()) return;
+        targetFile.getParentFile().mkdirs();
+        String resourcePath = "integrations/" + integrationName + "/" + resourceName;
+        try (InputStream in = plugin.getResource(resourcePath)) {
+            if (in != null) {
+                Files.copy(in, targetFile.toPath());
+                plugin.log("File: " + integrationName + "/" + resourceName + " was created successfully");
+            } else {
+                plugin.warn("File: Resource not found: " + resourcePath);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public FileConfiguration getPerksMenuFile() {
-        return PerksMenuConfig;
+
+    private FileConfiguration loadYaml(File file) {
+        FileConfiguration config = new YamlConfiguration();
+        try {
+            config.load(file);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+        return config;
     }
 
+    // Integration config (perks, tillGuaranteed, confirm-rarities)
+
+    public void createIntegrationConfigFile() {
+        integrationConfigFile = new File(getIntegrationFolder(), "config.yml");
+        saveIntegrationResource("config.yml", integrationConfigFile);
+        integrationConfig = loadYaml(integrationConfigFile);
+    }
+
+    public FileConfiguration getIntegrationConfig() {
+        return integrationConfig;
+    }
+
+    public void reloadIntegrationConfig() {
+        integrationConfig = YamlConfiguration.loadConfiguration(integrationConfigFile);
+    }
+
+    // Roll menu
+
+    public void createRollMenuFile() {
+        rollMenuFile = new File(getIntegrationFolder(), "roll-menu.yml");
+        saveIntegrationResource("roll-menu.yml", rollMenuFile);
+        rollMenuConfig = loadYaml(rollMenuFile);
+    }
+
+    public FileConfiguration getRollMenuFile() {
+        return rollMenuConfig;
+    }
+
+    public void reloadRollMenuFile() {
+        rollMenuConfig = YamlConfiguration.loadConfiguration(rollMenuFile);
+    }
+
+    public void saveRollMenuFile() {
+        try { rollMenuConfig.save(rollMenuFile); } catch (IOException e) { e.printStackTrace(); }
+    }
+
+    // Perks menu
+
     public void createPerksMenuFile() {
-        PerksMenuFile = new File(plugin.getDataFolder(), "perks-menu.yml");
-        if (!PerksMenuFile.exists()) {
-            PerksMenuFile.getParentFile().mkdirs();
+        perksMenuFile = new File(plugin.getDataFolder(), "perks-menu.yml");
+        if (!perksMenuFile.exists()) {
+            perksMenuFile.getParentFile().mkdirs();
             plugin.log("File: perks-menu.yml was created successfully");
             plugin.saveResource("perks-menu.yml", false);
         }
+        perksMenuConfig = loadYaml(perksMenuFile);
+    }
 
-        PerksMenuConfig = new YamlConfiguration();
-        try {
-            PerksMenuConfig.load(PerksMenuFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
+    public FileConfiguration getPerksMenuFile() {
+        return perksMenuConfig;
     }
-    public void reloadPerksMenuFile() { PerksMenuConfig = YamlConfiguration.loadConfiguration(PerksMenuFile); }
+
+    public void reloadPerksMenuFile() {
+        perksMenuConfig = YamlConfiguration.loadConfiguration(perksMenuFile);
+    }
+
     public void savePerksMenuFile() {
-        try {
-            PerksMenuConfig.save(PerksMenuFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        try { perksMenuConfig.save(perksMenuFile); } catch (IOException e) { e.printStackTrace(); }
     }
-    public FileConfiguration getConfirmMenuFile() {
-        return ConfirmMenuConfig;
-    }
+
+    // Confirm menu
 
     public void createConfirmMenuFile() {
-        ConfirmMenuFile = new File(plugin.getDataFolder(), "confirm-menu.yml");
-        if (!ConfirmMenuFile.exists()) {
-            ConfirmMenuFile.getParentFile().mkdirs();
-            plugin.log("File: confirm-menu.yml was created successfully");
-            plugin.saveResource("confirm-menu.yml", false);
-        }
-
-        ConfirmMenuConfig = new YamlConfiguration();
-        try {
-            ConfirmMenuConfig.load(ConfirmMenuFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
+        confirmMenuFile = new File(getIntegrationFolder(), "confirm-menu.yml");
+        saveIntegrationResource("confirm-menu.yml", confirmMenuFile);
+        confirmMenuConfig = loadYaml(confirmMenuFile);
     }
-    public void reloadConfirmMenuFile() { ConfirmMenuConfig = YamlConfiguration.loadConfiguration(ConfirmMenuFile); }
+
+    public FileConfiguration getConfirmMenuFile() {
+        return confirmMenuConfig;
+    }
+
+    public void reloadConfirmMenuFile() {
+        confirmMenuConfig = YamlConfiguration.loadConfiguration(confirmMenuFile);
+    }
+
     public void saveConfirmMenuFile() {
-        try {
-            ConfirmMenuConfig.save(ConfirmMenuFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        try { confirmMenuConfig.save(confirmMenuFile); } catch (IOException e) { e.printStackTrace(); }
+    }
+
+    // Locale
+
+    public void createLocaleFile() {
+        localeFile = new File(getIntegrationFolder(), "locale.yml");
+        saveIntegrationResource("locale.yml", localeFile);
+        localeConfig = loadYaml(localeFile);
+    }
+
+    public FileConfiguration getLocaleFile() {
+        return localeConfig;
+    }
+
+    public void reloadLocaleFile() {
+        localeConfig = YamlConfiguration.loadConfiguration(localeFile);
+    }
+
+    public void saveLocaleFile() {
+        try { localeConfig.save(localeFile); } catch (IOException e) { e.printStackTrace(); }
+    }
+
+    public String getIntegrationName() {
+        return integrationName;
     }
 }

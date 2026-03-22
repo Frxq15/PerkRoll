@@ -39,7 +39,7 @@ public class RollMenu extends GUITemplate {
                         createItem(file, "ITEMS." + item, refreshPlaceholders(), gPlayer.getName(), true),
                         p -> {
                             if (gPlayer.hasActivePerk()) {
-                                if (plugin.getConfig().getStringList("confirm-rarities").contains(gPlayer.getActivePerk().getPerk().getName())) {
+                                if (plugin.getPerkManager().getConfirmRarities().contains(gPlayer.getActivePerk().getPerk().getName())) {
                                     new ConfirmMenu(plugin, gPlayer).open(p);
                                     return;
                                 }

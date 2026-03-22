@@ -61,7 +61,11 @@ public final class PerkRoll extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
-        fileManager = new FileManager(this);
+
+        String activeIntegration = integrationManager.getActiveIntegrationName();
+        log("Using integration: " + activeIntegration);
+
+        fileManager = new FileManager(this, activeIntegration);
 
         dataFactory = new DataFactory(this);
         if (!dataFactory.initialize()) {
@@ -73,7 +77,6 @@ public final class PerkRoll extends JavaPlugin {
         perkManager = new PerkManager(this);
 
         localeManager = new LocaleManager(this);
-        localeManager.createLocaleFile();
 
         commandHandler = new CommandHandler(this);
         commandHandler.load();
